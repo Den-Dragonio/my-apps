@@ -1,0 +1,377 @@
+/* details.css - Стиль в духе торрент-трекера */
+
+/* Ссылка назад */
+.back-link {
+    color: #bdc3c7;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.back-link:hover {
+    color: white;
+}
+
+/* Основной контейнер */
+.detail-container {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 30px;
+    background: #ffffff;
+    /* Легкая тень, чтобы выделить блок на фоне */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+/* --- ВЕРХНЯЯ ЧАСТЬ (Обложка + Инфо) --- */
+.game-header {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 40px;
+    align-items: flex-start;
+}
+
+/* Обложка */
+.game-cover {
+    flex: 0 0 250px;
+    /* Фиксированная ширина картинки */
+    text-align: center;
+}
+
+.game-cover img {
+    width: 100%;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.update-tag {
+    background: #f1f1f1;
+    color: #555;
+    font-size: 0.8rem;
+    padding: 5px;
+    margin-top: 5px;
+    border-radius: 3px;
+}
+
+/* Информация справа */
+.game-info {
+    flex: 1;
+}
+
+.game-info h1 {
+    margin-top: 0;
+    font-size: 2rem;
+    color: #333;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+}
+
+.meta-list {
+    list-style: none;
+    padding: 0;
+    line-height: 1.8;
+    color: #555;
+}
+
+.requirements-box {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 5px;
+    margin-top: 20px;
+    font-size: 0.95rem;
+}
+
+.requirements-box h3 {
+    margin-top: 0;
+    color: #333;
+}
+
+/* --- ОБЩИЕ ЗАГОЛОВКИ РАЗДЕЛОВ --- */
+.section-title {
+    color: #2c3e50;
+    font-size: 1.4rem;
+    margin-top: 40px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
+}
+
+/* --- КАРУСЕЛЬ: СТРОГАЯ СЕТКА --- */
+
+.carousel-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    /* Возвращаем центрирование, чтобы не растягивало слайды */
+    background: #f9f9f9;
+    border-radius: 5px;
+    padding: 10px 0;
+    /* Небольшой отступ сверху и снизу */
+}
+
+.carousel-container {
+    display: flex;
+    overflow-x: hidden;
+    /* Скрываем полосу прокрутки и 4-й слайд */
+    scroll-behavior: smooth;
+    gap: 20px;
+    /* Расстояние между картинками */
+
+    /* Важно: ограничиваем ширину контейнера, чтобы влезало ровно 3 фото */
+    width: 100%;
+    margin: 0 10px;
+    /* Отступ от стрелочек */
+}
+
+/* СЛАЙДЫ (Фиксированный размер) */
+.slide {
+    /* Расчет: Контейнер примерно 800px. 
+       Делим на 3 = ~260px.
+       flex: 0 0 auto гарантирует, что они не будут сжиматься.
+    */
+    flex: 0 0 260px;
+    text-align: center;
+}
+
+.img-container {
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    border-radius: 4px;
+    /* Фиксируем высоту контейнера картинки */
+    height: 160px;
+    width: 100%;
+    background: #ddd;
+    /* Цвет фона пока картинка грузится */
+}
+
+.img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Картинка заполняет весь блок, обрезая лишнее */
+    display: block;
+    transition: transform 0.3s;
+}
+
+.img-container:hover img {
+    transform: scale(1.05);
+}
+
+.img-container:hover .zoom-icon {
+    opacity: 1;
+}
+
+.zoom-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    font-size: 1.5rem;
+    padding: 8px;
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+}
+
+.slide-caption {
+    margin-top: 10px;
+    font-size: 0.9rem;
+    color: #555;
+    font-weight: bold;
+}
+
+/* --- КНОПКИ (Прозрачные, только стрелки) --- */
+.nav-btn {
+    background: transparent;
+    /* Фона нет */
+    border: none;
+    color: #ccc;
+    /* Исходный цвет серый */
+    font-size: 3rem;
+    font-weight: 100;
+    /* Тонкая стрелка */
+    cursor: pointer;
+    padding: 0 10px;
+    /* Немного места для клика */
+    transition: color 0.3s;
+    user-select: none;
+    z-index: 5;
+
+    /* Чтобы кнопка не сжималась */
+    flex-shrink: 0;
+}
+
+.nav-btn:hover {
+    color: #2c3e50;
+    /* Зеленый при наведении */
+}
+
+.nav-btn:active {
+    color: #2c3e50;
+    transform: scale(0.9);
+}
+
+/* --- МОДАЛЬНОЕ ОКНО (LIGHTBOX) --- */
+.modal {
+    display: none;
+    /* Скрыто по умолчанию */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.9);
+    /* Черный фон */
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    margin: auto;
+    display: block;
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 5px;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+    animation: zoomIn 0.3s;
+    /* Анимация появления */
+}
+
+/* Кнопка закрытия (крестик) */
+.close {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.close:hover {
+    color: #bbb;
+}
+
+/* Анимация увеличения */
+@keyframes zoomIn {
+    from {
+        transform: scale(0)
+    }
+
+    to {
+        transform: scale(1)
+    }
+}
+
+/* --- ИНСТРУКЦИЯ --- */
+.install-steps li {
+    margin-bottom: 10px;
+}
+
+/* --- СКРИНШОТЫ --- */
+/* details.css - Одиночный большой скриншот */
+
+.screenshots-grid {
+    margin-top: 25px;
+    display: block;
+    /* Обычный блок, не flex */
+}
+
+.screenshots-grid img {
+    width: 100%;
+    /* Растягиваем на всю ширину контейнера */
+    height: auto;
+    /* Высота подбирается автоматически, чтобы не сплющить фото */
+    border-radius: 8px;
+    /* Скругляем углы */
+
+    /* Красивая тень, чтобы скриншот "парил" над фоном */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+
+    cursor: zoom-in;
+    /* Курсор-лупа при наведении */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Эффект при наведении */
+.screenshots-grid img:hover {
+    transform: translateY(-5px);
+    /* Чуть приподнимается */
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+    /* Тень становится больше */
+}
+
+/* Адаптивность: на телефонах ставим их друг под другом */
+@media (max-width: 600px) {
+    .screenshots-grid {
+        flex-direction: column;
+        /* Вертикальный столбик */
+    }
+
+    .screenshots-grid img {
+        width: 100%;
+        /* На телефоне каждая на всю ширину */
+        margin-bottom: 10px;
+    }
+}
+
+/* --- КНОПКА СКАЧАТЬ (Как на референсе) --- */
+.download-footer {
+    margin-top: 50px;
+    text-align: center;
+    background-color: #f7f7f7;
+    padding: 30px;
+    border-radius: 8px;
+    border: 1px solid #eee;
+}
+
+.file-info {
+    color: #2c3e50;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.torrent-btn {
+    display: inline-block;
+    background: linear-gradient(to bottom, #7ab536);
+    /* Градиент */
+    background-color: #8cc63f;
+    /* Запасной цвет */
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 15px 60px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    box-shadow: 0 4px 0 #6da02e;
+    /* "Объемная" тень кнопки снизу */
+    transition: top 0.1s, box-shadow 0.1s;
+    position: relative;
+}
+
+.torrent-btn:hover {
+    background-color: #7ab536;
+    top: 2px;
+    /* Эффект нажатия */
+    box-shadow: 0 2px 0 #6da02e;
+}
+
+/* Адаптивность для мобильных */
+@media (max-width: 700px) {
+    .game-header {
+        flex-direction: column;
+        /* Вертикально на телефоне */
+        align-items: center;
+    }
+
+    .game-cover {
+        width: 100%;
+        max-width: 300px;
+    }
+}

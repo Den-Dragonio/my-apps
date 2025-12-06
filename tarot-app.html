@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arcana Oracle - Скачать</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="details.css">
+</head>
+
+<body>
+
+    <header>
+        <a href="index.html" class="logo-link">
+            <h1>My Apps</h1>
+        </a>
+        <br>
+        <a href="index.html" class="back-link">← Вернуться к списку</a>
+    </header>
+
+    <main class="detail-container">
+
+        <div class="game-header">
+            <div class="game-cover">
+                <img src="img/taro-app/moon.png" alt="Обложка Arcana">
+                <div class="update-tag" style="background:#f3e5f5; color:#6a1b9a;">Kivy Framework</div>
+            </div>
+
+            <div class="game-info">
+                <h1>Arcana Oracle</h1>
+                <ul class="meta-list">
+                    <li><strong>Платформа:</strong> Windows (10/11)</li>
+                    <li><strong>Движок:</strong> Python + Kivy</li>
+                    <li><strong>Установка:</strong> Portable (Start.bat)</li>
+                    <li><strong>Тип:</strong> Эзотерика / Алгоритмы</li>
+                    <li><strong>Версия:</strong> 0.9</li>
+                </ul>
+
+                <div class="requirements-box">
+                    <h3>Системные требования:</h3>
+                    <p><strong>ОС:</strong> Windows 10 / 11</p>
+                    <p><strong>Интернет:</strong> Нужен 1 раз (для загрузки библиотек)</p>
+                    <p><strong>Запуск:</strong> Автоматический через .bat</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">О приложении:</h2>
+            <p class="description">
+                <strong>Arcana Oracle</strong> — это уникальное сочетание древних эзотерических знаний и современной
+                мощи языка Python.
+                Приложение отличается невероятно качественным визуальным стилем благодаря фреймворку
+                <strong>Kivy</strong>.
+            </p>
+            <p class="description" style="margin-top: 10px;">
+                В основе программы лежит <strong>сложная вычислительная формула</strong>. Результат гадания — это не
+                случайность,
+                а математический расчет, учитывающий фазу Луны, год Китайского календаря, сочетание карточных мастей и
+                Старших Арканов.
+                Всё, что нужно — ввести дату рождения.
+            </p>
+        </div>
+
+<div class="content-section">
+    <h2 class="section-title">Ключевые возможности:</h2>
+    <ul class="feature-list" style="list-style: none; padding: 0;">
+
+        <li style="margin-bottom: 15px; display: flex; align-items: start;">
+            <span style="color: #8e24aa; font-size: 1.2rem; margin-right: 10px;">🔮</span>
+            <div>
+                <strong>4 Сферы Судьбы:</strong>
+                Выбирайте один из 4 сегментов <strong>Семья, Финансы, Любовь и Успех</strong> для гадания. Сложная формула учитывает фазу Луны, год Китайского календаря
+                и нумерологию.
+            </div>
+        </li>
+
+        <li style="margin-bottom: 15px; display: flex; align-items: start;">
+            <span style="color: #8e24aa; font-size: 1.2rem; margin-right: 10px;">🃏</span>
+            <div>
+                <strong>Гибкие расклады:</strong>
+                Выбор количества карт: от 1 до 5. Молниеносный расчет результата без задержек.
+            </div>
+        </li>
+
+        <li style="margin-bottom: 15px; display: flex; align-items: start;">
+            <span style="color: #8e24aa; font-size: 1.2rem; margin-right: 10px;">🎨</span>
+            <div>
+                <strong>3 Легендарные Колоды:</strong>
+                В приложение встроены самые авторитетные системы: <em>Райдер-Уейт, Марсельское Таро и Таро Тота</em>.
+                Переключайтесь между ними в один клик.
+            </div>
+        </li>
+
+        <li style="margin-bottom: 15px; display: flex; align-items: start;">
+            <span style="color: #8e24aa; font-size: 1.2rem; margin-right: 10px;">⚙️</span>
+            <div>
+                <strong>Умный Запуск:</strong>
+                Start.bat автоматически создаст виртуальное окружение и подготовит библиотеки. Безопасно для системы.
+            </div>
+        </li>
+
+    </ul>
+</div>
+
+        <div class="content-section">
+            <h2 class="section-title">Визуальный стиль и Колоды:</h2>
+            <div class="carousel-wrapper">
+                <button class="nav-btn prev-btn" onclick="moveSlide(-1)">&#10094;</button>
+
+                <div class="carousel-container" id="carousel">
+                    <div class="slide">
+                        <div class="img-container" onclick="openModal(this)">
+                            <img src="img/taro-app/decks.png" alt="Колода 1">
+                            <div class="zoom-icon">🔍</div>
+                        </div>
+                        <p class="slide-caption">Разные колоды</p>
+                    </div>
+                    <div class="slide">
+                        <div class="img-container" onclick="openModal(this)">
+                            <img src="img/taro-app/cards.png" alt="Колода 2">
+                            <div class="zoom-icon">🔍</div>
+                        </div>
+                        <p class="slide-caption">Гадание по разным кол. карт</p>
+                    </div>
+                    <div class="slide">
+                        <div class="img-container" onclick="openModal(this)">
+                            <img src="img/taro-app/mm.png" alt="Сферы">
+                            <div class="zoom-icon">🔍</div>
+                        </div>
+                        <p class="slide-caption">Потрясающий визуал и дружеский интерфейс</p>
+                    </div>
+                    <div class="slide">
+                        <div class="img-container" onclick="openModal(this)">
+                            <img src="img/taro-app/var.png" alt="Сферы">
+                            <div class="zoom-icon">🔍</div>
+                        </div>
+                        <p class="slide-caption">Сферы выбора поля предсказаний</p>
+                    </div>
+                </div>
+
+                <button class="nav-btn next-btn" onclick="moveSlide(1)">&#10095;</button>
+            </div>
+        </div>
+
+<div class="content-section">
+    <h2 class="section-title">🔜 Roadmap (Планы развития):</h2>
+    <div class="roadmap-box"
+        style="background: #f9f9f9; padding: 20px; border-left: 4px solid #8e24aa; border-radius: 4px;">
+
+        <ul style="list-style: none; padding-left: 0; line-height: 1.8; color: #444;">
+            <li>🔹 <strong>Расширение раскладов:</strong> Увеличение количества карт в раскладе до 8.</li>
+            <li>🔹 <strong>Глубокий анализ:</strong> Расширенное описание к сферам и усложненная логика подсчета
+                ответов.</li>
+            <li>🔹 <strong>Нумерология Имени:</strong> Семантический анализ имени (по первой букве и количеству букв)
+                для уточнения прогноза.</li>
+            <li>🔹 <strong>Астро-модуль:</strong> Внедрение планетной составляющей в формулу расчета и отображение её в
+                отчете.</li>
+            <li>🔹 <strong>Синхронизация с Луной:</strong> Смена рисунка Луны в интерфейсе в зависимости от реальной
+                фазы на небе.</li>
+            <li>🔹 <strong>Атмосфера:</strong> Озвучка базовых фраз и голосовое сопровождение выпадения Высших Арканов.
+            </li>
+            <li>🔹 <strong>Кастомизация:</strong> Возможность выбора разных фонов приложения.</li>
+            <li>🔹 <strong>UX улучшения:</strong> Более понятные подписи с использованием эмодзи.</li>
+        </ul>
+
+        <p style="margin-top: 15px; font-size: 0.9rem; color: #777;">
+            <em>*В далеком будущем также планируется введение Premium-функционала.</em>
+        </p>
+    </div>
+</div>
+
+        <div class="content-section">
+            <h2 class="section-title">Как установить:</h2>
+            <ol class="install-steps">
+                <li>Скачайте и распакуйте архив.</li>
+                <li>Найдите файл <strong>start.bat</strong> и запустите его.</li>
+                <li>Дождитесь окончания установки библиотек (черное окно консоли). Это нужно только при первом запуске.
+                </li>
+                <li>Приложение откроется автоматически. Приятного гадания!</li>
+            </ol>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Интерфейс:</h2>
+            <div class="screenshots-grid">
+                <img src="img/taro-app/full.png" alt="Скриншот приложения" onclick="openModal(this)">
+            </div>
+        </div>
+
+        <div class="download-footer">
+            <p class="file-info">Размер: 120 MB | Версия: 1.0 | Python + Kivy</p>
+            <a href="https://drive.google.com/file/d/1MzuP4VUCYeqgDQRckYnW60pwJE9-Y_bg/view?usp=drive_link" class="torrent-btn" download
+                style="background: linear-gradient(to bottom, #ab47bc, #8e24aa); box-shadow: 0 4px 0 #6a1b9a;">Скачать
+                (ZIP)</a>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2025 My Apps Collection</p>
+    </footer>
+
+    <div id="imageModal" class="modal" onclick="closeModal()">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="modalImg">
+    </div>
+    <script src="script.js"></script>
+
+</body>
+
+</html>

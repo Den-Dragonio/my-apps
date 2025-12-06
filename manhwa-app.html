@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Читанка</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="details.css">
+</head>
+
+<body>
+
+    <header>
+        <a href="index.html" class="logo-link">
+            <h1>My Apps</h1>
+        </a>
+        <br>
+        <a href="index.html" class="back-link">← Вернуться к списку</a>
+    </header>
+
+    <main class="detail-container">
+
+        <div class="game-header">
+            <div class="game-cover">
+                <img src="img/manhwa-img/icon.png" alt="Обложка Manhwa App">
+                <div class="update-tag">Обновлено: 30.11.2025</div>
+            </div>
+
+            <div class="game-info">
+                <h1>Читанка</h1>
+                <ul class="meta-list">
+                    <li><strong>Дата выхода:</strong> 20.11.2025</li>
+                    <li><strong>Жанр:</strong> Читалка, Утилита</li>
+                    <li><strong>Разработчик:</strong> Денис Драга</li>
+                    <li><strong>Версия:</strong> 1.0.0 (Build 24)</li>
+                    <li><strong>Язык:</strong>Украинский</li>
+                </ul>
+
+                <div class="requirements-box">
+                    <h3>Системные требования:</h3>
+                    <p><strong>ОС:</strong> Windows 10 / 11 (64-bit)</p>
+                    <p style="color: red;"><strong>ОБЯЗАТЕЛЬНО СКАЧАНЫЙ ПАЙТОН!</strong></p> 
+                    <p><strong>Процессор:</strong> Любой 2-ядерный</p>
+                    <p><strong>ОЗУ:</strong> 4 GB RAM</p>
+                    <p><strong>Место на диске:</strong> 200 MB</p>
+                </div>
+            </div>
+        </div>
+
+<div class="content-section">
+    <h2 class="section-title">О приложении:</h2>
+    <p class="description">
+        <strong>Читанка</strong> — это ваш персональный цифровой хаб для систематизации прочитанного.
+        Инструмент разработан для тех, кто хочет не просто потреблять контент, но и анализировать его.
+        Создайте собственную библиотеку впечатлений от манг, манхв, книг, комиксов и визуальных новелл в едином,
+        интуитивно понятном интерфейсе.
+    </p>
+    <p class="description" style="margin-top: 10px;">
+        Приложение ориентировано на <strong>User-Friendly</strong> опыт: минимализм в дизайне сочетается с
+        глубоким функционалом базы данных.
+    </p>
+</div>
+
+<div class="content-section">
+    <h2 class="section-title">Ключевой функционал:</h2>
+    <ul class="feature-list" style="list-style: none; padding: 0;">
+
+        <li style="margin-bottom: 15px; display: flex; align-items: start;">
+            <span style="color: #7ab536; font-size: 1.2rem; margin-right: 10px;">★</span>
+            <div>
+                <strong>Гибкая система оценки:</strong>
+                Возможность выставлять рейтинг как в классическом формате "звезд", так и в точном цифровом значении
+                (например, 8/10).
+            </div>
+        </li>
+
+        <li style="margin-bottom: 15px; display: flex; align-items: start;">
+            <span style="color: #7ab536; font-size: 1.2rem; margin-right: 10px;">📚</span>
+            <div>
+                <strong>Трекинг прогресса:</strong>
+                Фиксация количества прочитанных глав или страниц. Вы всегда будете знать, где остановились.
+            </div>
+        </li>
+
+        <li style="margin-bottom: 15px; display: flex; align-items: start;">
+            <span style="color: #7ab536; font-size: 1.2rem; margin-right: 10px;">🏷️</span>
+            <div>
+                <strong>Тегирование и сортировка:</strong>
+                Присваивайте произведениям метки (теги) для быстрой фильтрации и поиска по вашей базе.
+            </div>
+        </li>
+
+        <li style="margin-bottom: 15px; display: flex; align-items: start;">
+            <span style="color: #7ab536; font-size: 1.2rem; margin-right: 10px;">✍️</span>
+            <div>
+                <strong>Рецензии и Заметки:</strong>
+                Специальные поля для написания синопсиса, краткого содержания и фиксации эмоционального отклика после
+                прочтения.
+            </div>
+        </li>
+
+        <li style="margin-bottom: 15px; display: flex; align-items: start;">
+            <span style="color: #7ab536; font-size: 1.2rem; margin-right: 10px;">🛡️</span>
+            <div>
+                <strong>Безопасность и Администрирование:</strong>
+                Встроенная система защиты прав. Редактирование, добавление и удаление рецензий доступно только
+                администратору (вам). Гости могут только просматривать.
+            </div>
+        </li>
+
+    </ul>
+</div>
+
+<div class="content-section">
+    <h2 class="section-title">Функционал (Скриншоты):</h2>
+
+    <div class="carousel-wrapper">
+
+        <button class="nav-btn prev-btn" onclick="moveSlide(-1)">&#10094;</button>
+
+        <div class="carousel-container" id="carousel">
+
+            <div class="slide">
+                <div class="img-container" onclick="openModal(this)">
+                    <img src="img/manhwa-img/filtr.png" alt="Фильтрация">
+                    <div class="zoom-icon">🔍</div>
+                </div>
+                <p class="slide-caption">Умная фильтрация</p>
+            </div>
+
+            <div class="slide">
+                <div class="img-container" onclick="openModal(this)">
+                    <img src="img/manhwa-img/sort.png" alt="Сортировка">
+                    <div class="zoom-icon">🔍</div>
+                </div>
+                <p class="slide-caption">Сортировка</p>
+            </div>
+
+            <div class="slide">
+                <div class="img-container" onclick="openModal(this)">
+                    <img src="img/manhwa-img/top.png" alt="Избранное">
+                    <div class="zoom-icon">🔍</div>
+                </div>
+                <p class="slide-caption">Избранное</p>
+            </div>
+
+            <div class="slide">
+                <div class="img-container" onclick="openModal(this)">
+                    <img src="img/manhwa-img/custom.png" alt="Кастомизация">
+                    <div class="zoom-icon">🔍</div>
+                </div>
+                <p class="slide-caption">Кастомизация</p>
+            </div>
+
+            <div class="slide">
+                <div class="img-container" onclick="openModal(this)">
+                    <img src="img/manhwa-img/security.png" alt="Защита">
+                    <div class="zoom-icon">🔍</div>
+                </div>
+                <p class="slide-caption">Приватность</p>
+            </div>
+
+        </div>
+
+        <button class="nav-btn next-btn" onclick="moveSlide(1)">&#10095;</button>
+    </div>
+</div>
+
+<div id="imageModal" class="modal" onclick="closeModal()">
+    <span class="close">&times;</span>
+    <img class="modal-content" id="modalImg">
+</div>
+
+<script src="script.js"></script>
+
+</body>
+
+</html>
+
+        <div class="content-section">
+            <h2 class="section-title">Как установить:</h2>
+            <ol class="install-steps">
+                <li>Скачайте зип архив по кнопке внизу страницы.</li>
+                <li>Разархивируйте - нажмите правой кнопкой мыши по архиву -> <strong>"Извлечь всё"</strong>.</li>
+                <li>Зайдите в папку и запустите файл <strong>start.bat</strong>.</li>
+                <li>Готово! Подождите пока не откроеться страничка в браузере.</li>
+                <li><span style="color: red; font-weight: 700;">ВАЖНО!</span> Не закрывайте командную строку пока пользуетесь приложением!</li>
+            </ol>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Скриншоты из приложения:</h2>
+            <div class="screenshots-grid">
+                <img src="img/manhwa-img/full-app.png" alt="Скриншот 2">
+            </div>
+        </div>
+
+        <div class="download-footer">
+            <p class="file-info">Размер: 150 MB | Версия: 1.0.0 | Тип: ZIP Архив</p>
+            <a href="files/manhwa-rating.zip" class="torrent-btn" download>Скачать (Прямая ссылка)</a>
+        </div>
+
+    </main>
+    
+<footer>
+    <p>&copy; 2025 My Apps Collection</p>
+</footer>
+
+</body>
+
+</html>

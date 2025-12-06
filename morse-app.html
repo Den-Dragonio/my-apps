@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Morse Translator - Скачать</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="details.css">
+</head>
+
+<body>
+
+    <header>
+        <a href="index.html" class="logo-link">
+            <h1>My Apps</h1>
+        </a>
+        <br>
+        <a href="index.html" class="back-link">← Вернуться к списку</a>
+    </header>
+
+    <main class="detail-container">
+
+        <div class="game-header">
+            <div class="game-cover">
+                <img src="img/morze-tr-img/icon.png" alt="Обложка Morse Py">
+                <div class="update-tag">Версия: 1.0</div>
+            </div>
+
+            <div class="game-info">
+                <h1>Morse Translator (Python)</h1>
+                <ul class="meta-list">
+                    <li><strong>Дата релиза:</strong> 30 нояб. 2025</li>
+                    <li><strong>Тип:</strong> Консольная утилита / GUI</li>
+                    <li><strong>Язык кода:</strong> Python 3</li>
+                    <li><strong>Разработчик:</strong> Драга Денис</li>
+                </ul>
+
+                <div class="requirements-box">
+                    <h3>Системные требования:</h3>
+                    <p><strong>ОС:</strong> Windows ONLY</p>
+                    <p><strong>ОЗУ:</strong> 50 MB</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">О проекте:</h2>
+            <p class="description">
+                <strong>Morse Translator</strong> — это легковесная, но мощная утилита для мгновенного кодирования и
+                декодирования сообщений.
+                Программа использует алгоритмы Python для точного перевода текста в последовательность точек и тире, и
+                наоборот.
+            </p>
+            <p class="description" style="margin-top: 10px;">
+                Идеально подходит для изучения азбуки Морзе, шифрования секретных сообщений или просто для понимания
+                логики работы строковых алгоритмов.
+            </p>
+        </div>
+
+<div class="content-section">
+    <h2 class="section-title">Преимущества приложения:</h2>
+    <ul class="benefits-list" style="list-style: none; padding: 0;">
+
+        <li style="margin-bottom: 12px; display: flex; align-items: start;">
+            <span style="color: #7ab536; font-weight: bold; font-size: 1.2rem; margin-right: 12px;">✓</span>
+            <div>
+                <strong>Обучающий эффект:</strong>
+                Приложение помогает тренировать слух и запоминать ритмический рисунок азбуки Морзе, а не просто
+                переводит текст.
+            </div>
+        </li>
+
+        <li style="margin-bottom: 12px; display: flex; align-items: start;">
+            <span style="color: #7ab536; font-weight: bold; font-size: 1.2rem; margin-right: 12px;">✓</span>
+            <div>
+                <strong>Комфорт для глаз:</strong>
+                Наличие полноценной темной темы позволяет работать с текстом ночью без напряжения зрения.
+            </div>
+        </li>
+
+        <li style="margin-bottom: 12px; display: flex; align-items: start;">
+            <span style="color: #7ab536; font-weight: bold; font-size: 1.2rem; margin-right: 12px;">✓</span>
+            <div>
+                <strong>Полная автономность:</strong>
+                Программа работает полностью офлайн. Никакой рекламы, трекеров или требований интернета.
+            </div>
+        </li>
+
+        <li style="margin-bottom: 12px; display: flex; align-items: start;">
+            <span style="color: #7ab536; font-weight: bold; font-size: 1.2rem; margin-right: 12px;">✓</span>
+            <div>
+                <strong>Гибкость настройки:</strong>
+                Вы сами управляете скоростью воспроизведения звука (WPM), подстраивая её под свой уровень навыков.
+            </div>
+        </li>
+
+    </ul>
+</div>
+
+        <div class="content-section">
+
+            <h2 class="section-title">Внешний вид и настройки:</h2>
+        
+            <div class="carousel-wrapper">
+        
+                <button class="nav-btn prev-btn" onclick="moveSlide(-1)">&#10094;</button>
+        
+                <div class="carousel-container" id="carousel">
+        
+                    <div class="slide">
+                        <div class="img-container" onclick="openModal(this)">
+                            <img src="img/morze-tr-img/light.png" alt="Светлая тема">
+                            <div class="zoom-icon">🔍</div>
+                        </div>
+                        <p class="slide-caption">Светлая тема</p>
+                    </div>
+        
+                    <div class="slide">
+                        <div class="img-container" onclick="openModal(this)">
+                            <img src="img/morze-tr-img/dark.png" alt="Темная тема">
+                            <div class="zoom-icon">🔍</div>
+                        </div>
+                        <p class="slide-caption">Темная тема (Dark Mode)</p>
+                    </div>
+        
+                    <div class="slide">
+                        <div class="img-container" onclick="openModal(this)">
+                            <img src="img/morze-tr-img/settings.png" alt="Настройки звука">
+                            <div class="zoom-icon">🔍</div>
+                        </div>
+                        <p class="slide-caption">Настройка скорости (WPM)</p>
+                    </div>
+        
+                    <div class="slide">
+                        <div class="img-container" onclick="openModal(this)">
+                            <img src="img/morze-tr-img/lang.png" alt="Выбор языка">
+                            <div class="zoom-icon">🔍</div>
+                        </div>
+                        <p class="slide-caption">Смена языка (RU/EN)</p>
+                    </div>
+        
+                </div>
+        
+                <button class="nav-btn next-btn" onclick="moveSlide(1)">&#10095;</button>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Как запустить:</h2>
+            <ol class="install-steps">
+                <li>Скачайте архив по кнопке ниже.</li>
+                <li>Просто запустите .exe файл.</li>
+            </ol>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Интерфейс программы:</h2>
+            <div class="screenshots-grid">
+                <img src="img/morze-tr-img/light.png" alt="Скриншот Morse Translator" onclick="openModal(this)">
+            </div>
+        </div>
+
+        <div class="download-footer">
+            <p class="file-info">Размер: 5 MB | Язык: Python | Тип: EXE</p>
+            <a href="files/index.exe" class="torrent-btn" download>Скачать инстолятор</a>
+        </div>
+
+    </main>
+
+    <div id="imageModal" class="modal" onclick="closeModal()">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="modalImg">
+    </div>
+
+    <footer>
+        <p>&copy; 2025 My Apps Collection</p>
+    </footer>
+    
+    <script src="script.js"></script>
+
+</body>
+
+</html>

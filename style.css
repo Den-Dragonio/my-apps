@@ -1,0 +1,225 @@
+/* Общие настройки */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+/* --- ШАПКА (СЛЕВА) --- */
+header {
+    background-color: #2c3e50;
+    color: white;
+    padding: 1.5rem 40px;
+    /* 40px отступ слева */
+    text-align: left;
+    /* Прижимаем текст влево */
+}
+
+/* Ссылка-заголовок "My Apps" */
+.logo-link {
+    text-decoration: none;
+    color: white;
+    display: inline-block;
+}
+
+.logo-link h1 {
+    margin: 0;
+    font-size: 2rem;
+}
+
+.logo-link:hover h1 {
+    color: #3498db;
+    /* Легкий эффект при наведении на лого */
+}
+
+.subtitle {
+    margin: 5px 0 0 0;
+    font-size: 0.9rem;
+    color: #bdc3c7;
+    font-weight: normal;
+}
+
+/* --- СЕТКА КАРТОЧЕК --- */
+.container {
+    /* Убрали margin: 0 auto, чтобы не центрировалось */
+    margin: 40px;
+
+    display: flex;
+    /* Используем Flexbox для ряда */
+    flex-wrap: wrap;
+    /* Если не влезает — перенос на след. строку */
+    gap: 20px;
+    /* Расстояние между карточками */
+}
+
+/* --- СТИЛЬ КАРТОЧКИ --- */
+.app-card {
+    display: block;
+    background: white;
+
+    /* ФИКСИРОВАННЫЙ БЛОК */
+    width: 300px;
+    /* Ширина всегда 300px */
+    height: 180px;
+    /* Высота фиксирована, чтобы было ровно */
+
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+    text-decoration: none;
+    color: inherit;
+
+    /* Чтобы текст внутри не прилипал к краям */
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.app-card h2 {
+    color: #2c3e50;
+    font-size: 1.4rem;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+/* Эффект при наведении на активную карточку */
+.app-card:not(.placeholder):hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+}
+
+/* --- СЕРЫЙ БЛОК (Плейсхолдер) --- */
+.placeholder {
+    background-color: #e0e0e0;
+    /* Серый фон */
+    border: 2px dashed #bdc3c7;
+    /* Пунктирная рамка */
+    color: #7f8c8d;
+    box-shadow: none;
+    /* Без тени */
+    cursor: default;
+    /* Курсор не меняется */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.placeholder h2 {
+    font-size: 3rem;
+    color: #95a5a6;
+    margin: 0;
+    line-height: 1;
+}
+
+.placeholder p {
+    font-size: 0.9rem;
+    margin: 10px 0 0 0;
+}
+
+footer {
+    padding: 20px 40px;
+    font-size: 0.9rem;
+    color: #777;
+    text-align: left;
+}
+
+/* --- СТИЛЬ ДЛЯ ЗЕЛЕНОЙ КАРТОЧКИ --- */
+
+.morse-style {
+    /* Градиент по диагонали: от белого к светло-зеленому */
+    background: linear-gradient(135deg, #ffffff 0%, #e8f5e9 100%);
+
+    /* Добавим тонкую зеленую рамку, чтобы выделить */
+    border: 1px solid #c8e6c9;
+}
+
+/* Эффект при наведении (делаем градиент чуть насыщеннее) */
+.morse-style:hover {
+    background: linear-gradient(135deg, #f1f8e9 0%, #c8e6c9 100%);
+    transform: translateY(-5px);
+    /* Сохраняем эффект подъема */
+}
+
+/* Можно перекрасить заголовок в темно-зеленый для гармонии */
+.morse-style h2 {
+    color: #2e7d32;
+}
+
+/* --- СТИЛЬ ДЛЯ СИНЕЙ КАРТОЧКИ (Manhwa) --- */
+
+.manhwa-style {
+    /* Градиент: от белого к небесно-голубому */
+    background: linear-gradient(135deg, #ffffff 0%, #e3f2fd 100%);
+
+    /* Тонкая голубая рамка */
+    border: 1px solid #bbdefb;
+}
+
+/* Эффект при наведении */
+.manhwa-style:hover {
+    /* Делаем синий чуть ярче */
+    background: linear-gradient(135deg, #f5faff 0%, #bbdefb 100%);
+    transform: translateY(-5px);
+}
+
+/* Заголовок темно-синий */
+.manhwa-style h2 {
+    color: #1565c0;
+}
+
+/* --- СТИЛЬ ДЛЯ ФИОЛЕТОВОЙ КАРТОЧКИ (Магия/Tarot) --- */
+.purple-style {
+    /* Градиент: от белого к глубокому фиолетовому */
+    background: linear-gradient(135deg, #ffffff 0%, #f3e5f5 100%);
+    border: 1px solid #e1bee7;
+}
+
+.purple-style:hover {
+    background: linear-gradient(135deg, #fdfbff 0%, #e1bee7 100%);
+    transform: translateY(-5px);
+}
+
+.purple-style h2 {
+    color: #6a1b9a;
+    /* Темно-фиолетовый заголовок */
+}
+
+/* --- ФУТЕР --- */
+footer {
+    text-align: center;
+    /* Текст строго по центру */
+    color: #95a5a6;
+    /* Светло-серый цвет текста */
+    padding: 40px 20px;
+    /* Отступы: 40px сверху/снизу, 20px по бокам */
+    margin-top: 50px;
+    /* Отталкиваем футер вниз от контента */
+    font-size: 0.9rem;
+    /* Шрифт чуть меньше основного */
+
+    /* Опционально: тонкая линия сверху, чтобы отделить от контента */
+    border-top: 1px solid #e0e0e0;
+}
+
+/* --- СТИЛЬ ДЛЯ КРАСНОЙ КАРТОЧКИ (Connect4) --- */
+.c4-style {
+    /* Градиент: от белого к светло-красному */
+    background: linear-gradient(135deg, #ffffff 0%, #ffebee 100%);
+    border: 1px solid #ffcdd2;
+}
+
+.c4-style:hover {
+    background: linear-gradient(135deg, #fffafb 0%, #ffcdd2 100%);
+    transform: translateY(-5px);
+}
+
+.c4-style h2 {
+    color: #c62828;
+    /* Темно-красный заголовок */
+}
