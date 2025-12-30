@@ -223,3 +223,20 @@ footer {
     color: #c62828;
     /* Темно-красный заголовок */
 }
+
+/* --- СТИЛЬ ДЛЯ СПОРТИВНОЙ КАРТОЧКИ (Gym) --- */
+.gym-style {
+    /* Градиент: от белого к светло-оранжевому */
+    background: linear-gradient(135deg, #ffffff 0%, #fff3e0 100%);
+    border: 1px solid #ffe0b2;
+}
+
+.gym-style:hover {
+    background: linear-gradient(135deg, #fff8f0 0%, #ffcc80 100%);
+    transform: translateY(-5px);
+}
+
+.gym-style h2 {
+    color: #ef6c00;
+    /* Темно-оранжевый заголовок */
+}

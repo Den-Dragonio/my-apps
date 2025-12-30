@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gym Notebook - Дневник Тренировок</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="details.css">
+</head>
+
+<body>
+
+    <header>
+        <a href="index.html" class="logo-link">
+            <h1>My Apps</h1>
+        </a>
+        <br>
+        <a href="index.html" class="back-link">← Вернуться к списку</a>
+    </header>
+
+    <main class="detail-container">
+
+        <div class="game-header">
+            <div class="game-cover">
+                <img src="img/Gym-app/logo.png" alt="Обложка Gym App">
+                <div class="update-tag" style="background:#fff3e0; color:#ef6c00;">Sport Utility</div>
+            </div>
+
+            <div class="game-info">
+                <h1>Gym Notebook</h1>
+                <ul class="meta-list">
+                    <li><strong>Категория:</strong> Спорт / Здоровье</li>
+                    <li><strong>Платформа:</strong> PC | Windows</li>
+                    <li><strong>Технология:</strong> WPF (Windows Presentation Foundation)</li>
+                    <li><strong>Язык:</strong> C# / .NET 8.0</li>
+                    <li><strong>Хранение данных:</strong> JSON</li>
+                    <li><strong>Год:</strong> 2025</li>
+                    <li><strong>Версия:</strong> 0.1b</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">О приложении:</h2>
+            <p class="description">
+                <strong>Gym Notebook</strong> — это ваш личный цифровой ассистент. Все данные о тренировках хранятся в
+                надежной базе данных.
+                Вы всегда видите дату и время записи, а гибкая система настроек позволяет адаптировать приложение под
+                себя.
+            </p>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Функционал:</h2>
+            <ul class="feature-list" style="list-style: none; padding: 0;">
+
+                <li style="margin-bottom: 15px; display: flex; align-items: start;">
+                    <span style="color: #ef6c00; font-size: 1.2rem; margin-right: 10px;">📅</span>
+                    <div>
+                        <strong>User-Friendly Интерфейс:</strong>
+                        Удобный и интуитивно понятный календарь. На данный момент оптимизирован под <strong>2025
+                            год</strong>,
+                        но вы можете свободно выбрать любой месяц и любой день для внесения записей.
+                    </div>
+                </li>
+
+                <li style="margin-bottom: 15px; display: flex; align-items: start;">
+                    <span style="color: #ef6c00; font-size: 1.2rem; margin-right: 10px;">🏋️</span>
+                    <div>
+                        <strong>Система тренировок:</strong>
+                        Вносите название вашей системы (Верх/Низ, Push/Pull, Сплит и т.д.). Полная свобода в именовании
+                        дней.
+                    </div>
+                </li>
+
+                <li style="margin-bottom: 15px; display: flex; align-items: start;">
+                    <span style="color: #ef6c00; font-size: 1.2rem; margin-right: 10px;">🔢</span>
+                    <div>
+                        <strong>Гибкость упражнений:</strong>
+                        Добавляйте любое количество упражнений (от 1 до бесконечности). Регулируйте количество
+                        выполненных повторений
+                        для каждого подхода с точностью до единицы.
+                    </div>
+                </li>
+
+                <li style="margin-bottom: 15px; display: flex; align-items: start;">
+                    <span style="color: #ef6c00; font-size: 1.2rem; margin-right: 10px;">📝</span>
+                    <div>
+                        <strong>Заметки и База:</strong>
+                        Оставляйте комментарии и пометки к каждой тренировке (самочувствие, рабочие веса).
+                        Все данные, включая дату и время, надежно сохраняются в базе. Также реализована система
+                        настроек.
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Интерфейс приложения:</h2>
+
+            <div class="carousel-wrapper">
+                <button class="nav-btn prev-btn" onclick="moveSlide(-1)">&#10094;</button>
+
+                <div class="carousel-container" id="carousel">
+
+                    <div class="slide">
+                        <div class="img-container" onclick="openModal(this)">
+                            <img src="img/Gym-app/main-menu.png" alt="Календарь тренировок">
+                            <div class="zoom-icon">🔍</div>
+                        </div>
+                        <p class="slide-caption">Выбор дня и месяца</p>
+                    </div>
+
+                    <div class="slide">
+                        <div class="img-container" onclick="openModal(this)">
+                            <img src="img/Gym-app/exercise.png" alt="Ввод упражнений">
+                            <div class="zoom-icon">🔍</div>
+                        </div>
+                        <p class="slide-caption">Ввод упражнений и повторов</p>
+                    </div>
+
+                    <div class="slide">
+                        <div class="img-container" onclick="openModal(this)">
+                            <img src="img/Gym-app/settings.png" alt="Настройки">
+                            <div class="zoom-icon">🔍</div>
+                        </div>
+                        <p class="slide-caption">Настройки</p>
+                    </div>
+
+                </div>
+
+                <button class="nav-btn next-btn" onclick="moveSlide(1)">&#10095;</button>
+            </div>
+        </div>
+
+<div class="content-section">
+    <h2 class="section-title">🔜 Глобальная карта развития (Roadmap):</h2>
+    <div class="roadmap-box"
+        style="background: #f9f9f9; padding: 20px; border-left: 4px solid #ef6c00; border-radius: 4px;">
+
+        <h3 style="margin-top: 0; color: #e65100; font-size: 1.1rem;">🛠 Улучшение Тренировок:</h3>
+        <ul style="list-style: none; padding-left: 0; line-height: 1.6; color: #444; margin-bottom: 20px;">
+            <li>🟠 <strong>Расширенные комментарии:</strong> Окно заметок с форматированием текста
+                (<strong>жирный</strong>, <em>курсив</em>) под каждым упражнением.</li>
+            <li>🟠 <strong>Тайм-менеджмент:</strong> Окошко фиксации времени тренировки и таймер отдыха между подходами.
+            </li>
+            <li>🟠 <strong>Шаблоны:</strong> Возможность копировать прошлые тренировки или создавать пресеты (например,
+                "День Ног").</li>
+        </ul>
+
+        <h3 style="color: #e65100; font-size: 1.1rem;">📅 Навигация и История:</h3>
+        <ul style="list-style: none; padding-left: 0; line-height: 1.6; color: #444; margin-bottom: 20px;">
+            <li>🟠 <strong>Расширение календаря:</strong> Добавление архива за 2024 год и поддержка будущих (2026+).
+            </li>
+            <li>🟠 <strong>Боковая панель (Sidebar):</strong> Быстрый доступ к последним 5 тренировкам (в виде блоков,
+                как в календаре).</li>
+            <li>🟠 <strong>Быстрый переход:</strong> Кнопки навигации "К первой тренировке" и "К крайней записи".</li>
+        </ul>
+
+        <h3 style="color: #e65100; font-size: 1.1rem;">⚙️ Системные настройки:</h3>
+        <ul style="list-style: none; padding-left: 0; line-height: 1.6; color: #444; margin-bottom: 20px;">
+            <li>🟠 <strong>Конвертация:</strong> Реально работающий переключатель кг/фунты с пересчетом значений в базе.
+            </li>
+            <li>🟠 <strong>Темизация:</strong> Рабочие кнопки смены темы (Светлая / Темная / Системная) и языка
+                интерфейса.</li>
+            <li>🟠 <strong>Погода:</strong> Интеграция погодного виджета для фиксации условий тренировки.</li>
+        </ul>
+
+        <h3 style="color: #e65100; font-size: 1.1rem;">👤 Аккаунт и Платформа:</h3>
+        <ul style="list-style: none; padding-left: 0; line-height: 1.6; color: #444;">
+            <li>🟠 <strong>Мой Профиль:</strong> Полноценная вкладка с антропометрией (замеры тела) и личной
+                статистикой.</li>
+            <li>🟠 <strong>Multi-User:</strong> Система Логина и Регистрации для использования программы несколькими
+                людьми.</li>
+            <li>🟠 <strong>iOS Support:</strong> Портирование и поддержка устройств Apple.</li>
+        </ul>
+
+    </div>
+</div>
+
+        <div class="download-footer">
+            <p class="file-info">Тип файла: .exe</p>
+            <a href="https://drive.google.com/file/d/1aEjJeksRUofnuMO-GOtIKG4MSFSgbVoJ/view?usp=sharing" class="torrent-btn" download
+                style="background: linear-gradient(to bottom, #ff9800, #ef6c00); box-shadow: 0 4px 0 #e65100;">Скачать
+                Приложение</a>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2025 My Apps Collection</p>
+    </footer>
+
+    <div id="imageModal" class="modal" onclick="closeModal()">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="modalImg">
+    </div>
+    <script src="script.js"></script>
+
+</body>
+
+</html>
