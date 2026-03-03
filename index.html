@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Apps</title>
+    <link rel="icon" type="image/png" href="img/icon.png">
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -14,45 +15,562 @@
         <a href="index.html" class="logo-link">
             <h1>My Apps</h1>
         </a>
-        <p class="subtitle">Коллекция приложений</p>
+        <p class="subtitle">App Collection</p>
     </header>
 
-    <main class="container">
+    <main class="page-layout">
 
-        <a href="gym-app.html" class="app-card gym-style">
-            <h2>Gym Notebook</h2>
-            <p>Твой цифровой дневник тренировок. Учет подходов, весов и прогресса. Строгий дизайн.</p>
-        </a>
+        <!-- LEFT: Apps Grid -->
+        <section class="apps-section">
+            <h2 class="section-heading">🖥️ Desktop Applications</h2>
+            <div class="container">
 
-        <a href="connect4.html" class="app-card c4-style">
-            <h2>Connect4 3D</h2>
-            <p>Легендарная настольная игра в новом измерении. Современная графика и физика.</p>
-        </a>
+                <a href="gym-app.html" class="app-card gym-style">
+                    <h2>Gym Notebook</h2>
+                    <p>Your digital workout journal. Track sets, weights, and progress. Clean and strict design.</p>
+                </a>
 
-        <a href="tarot-app.html" class="app-card purple-style">
-            <h2>Arcana Oracle</h2>
-            <p>Мистический оракул на Python (Kivy). Сложные алгоритмы гадания и красивый визуал.</p>
-        </a>
+                <a href="connect4.html" class="app-card c4-style">
+                    <h2>Connect4 3D</h2>
+                    <p>The legendary board game in a new dimension. Modern graphics and physics.</p>
+                </a>
 
-        <a href="manhwa-app.html" class="app-card manhwa-style">
-            <h2>Books Review App</h2>
-            <p>Библиотека прочитаных вами книг, для оценки произведений и описания оставленых ими впечетлений. </p>
-        </a>
+                <a href="tarot-app.html" class="app-card purple-style">
+                    <h2>Arcana Oracle</h2>
+                    <p>A mystical oracle built with Python (Kivy). Complex divination algorithms and beautiful visuals.
+                    </p>
+                </a>
 
-        <a href="morse-app.html" class="app-card morse-style">
-            <h2>Morse Translator</h2>
-            <p>Переводчик текста в азбуку Морзе и обратно. Написан на Python.</p>
-        </a>
+                <a href="manhwa-app.html" class="app-card manhwa-style">
+                    <h2>Books Review App</h2>
+                    <p>A library of books you've read, for rating works and recording the impressions they left.</p>
+                </a>
 
-        <div class="app-card placeholder">
-            <h2>+</h2>
-            <p>Скоро здесь будет новое приложение</p>
-        </div>
+                <a href="morse-app.html" class="app-card morse-style">
+                    <h2>Morse Translator</h2>
+                    <p>A text-to-Morse code translator and back. Written in Python.</p>
+                </a>
+
+                <div class="app-card placeholder">
+                    <h2>+</h2>
+                    <p>A new app is coming soon</p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- RIGHT: Websites Panel -->
+        <aside class="websites-panel">
+            <h2 class="section-heading">🌐 My Websites</h2>
+
+            <!-- Site 1: Resume -->
+            <div class="site-card">
+                <div class="site-card-header">
+                    <span class="site-icon">💼</span>
+                    <div>
+                        <a href="https://den-dragonio.github.io/cyber-glacier-resume/" target="_blank"
+                            class="site-link">Cyber Glacier Resume</a>
+                        <span class="site-badge resume-badge">Resume</span>
+                    </div>
+                </div>
+                <p class="site-desc">A personal résumé / business-card website showcasing skills, projects, and contact
+                    info.</p>
+                <button class="read-more-btn" onclick="openSiteModal('resume')">📖 Read detailed info</button>
+            </div>
+
+            <!-- Site 2: Light Monitor -->
+            <div class="site-card">
+                <div class="site-card-header">
+                    <span class="site-icon">💡</span>
+                    <div>
+                        <a href="https://esvitlo-web.onrender.com/" target="_blank" class="site-link">eSvitlo
+                            Monitor</a>
+                        <span class="site-badge monitor-badge">Utility</span>
+                    </div>
+                </div>
+                <p class="site-desc">Real-time electricity / light monitoring dashboard for the apartment building I
+                    live in.</p>
+                <button class="read-more-btn" onclick="openSiteModal('esvitlo')">📖 Read detailed info</button>
+            </div>
+
+            <!-- Site 3: Chess Library -->
+            <div class="site-card">
+                <div class="site-card-header">
+                    <span class="site-icon">♟️</span>
+                    <div>
+                        <a href="https://chess-lib.onrender.com/" target="_blank" class="site-link">Chess Library</a>
+                        <span class="site-badge chess-badge">Library</span>
+                    </div>
+                </div>
+                <p class="site-desc">My personal digital library of chess books — browse, filter, and discover great
+                    reads.</p>
+                <button class="read-more-btn" onclick="openSiteModal('chess')">📖 Read detailed info</button>
+            </div>
+
+        </aside>
 
     </main>
+
     <footer>
         <p>&copy; 2025 My Apps Collection</p>
     </footer>
+
+    <!-- ===== MODALS ===== -->
+
+    <!-- Modal: Resume -->
+    <div id="modal-resume" class="site-modal-overlay" onclick="closeSiteModal(event, 'modal-resume')">
+        <div class="site-modal site-modal--wide">
+            <button class="site-modal-close" onclick="closeSiteModalBtn('modal-resume')">&times;</button>
+            <div class="site-modal-badge resume-badge">Portfolio · Vanilla Web · GitHub Pages</div>
+            <h2>💼 Cyber Glacier — Interactive Personal Portfolio</h2>
+            <a href="https://den-dragonio.github.io/cyber-glacier-resume/" target="_blank"
+                class="site-modal-url">den-dragonio.github.io/cyber-glacier-resume</a>
+
+            <!-- Overview -->
+            <div class="site-modal-section">
+                <h3>About the Project</h3>
+                <p>
+                    A personal portfolio / résumé website built entirely from scratch using a pure Vanilla Web Stack
+                    (HTML5, CSS3, JavaScript). The decision to avoid heavy front-end frameworks like React or Angular
+                    was deliberate — to prevent overengineering, keep the project lightweight, maximize loading speeds,
+                    and demonstrate a deep understanding of core DOM manipulation and browser rendering engines.
+                </p>
+            </div>
+
+            <!-- Tech Stack -->
+            <div class="site-modal-section">
+                <h3>⚙️ Tech Stack &amp; Architecture</h3>
+                <div class="esvitlo-stack-grid">
+                    <div class="stack-item">
+                        <span class="stack-icon">🏗️</span>
+                        <div>
+                            <strong>Core Stack</strong><br>
+                            <span>HTML5 · CSS3 · Vanilla JavaScript</span>
+                            <p>Zero dependencies, zero build step. Pure browser-native technologies for maximum
+                                portability and minimum overhead.</p>
+                        </div>
+                    </div>
+                    <div class="stack-item">
+                        <span class="stack-icon">🎨</span>
+                        <div>
+                            <strong>UI / CSS Architecture</strong><br>
+                            <span>CSS Grid · Flexbox · CSS Variables · backdrop-filter</span>
+                            <p>Mobile-first responsive layout powered by Grid + Flexbox. Glassmorphism aesthetic via
+                                <code>backdrop-filter</code>. Color palette managed through CSS Custom Properties.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="stack-item">
+                        <span class="stack-icon">⚡</span>
+                        <div>
+                            <strong>JS Performance</strong><br>
+                            <span>requestAnimationFrame · DOM Lifecycle Management</span>
+                            <p>Physics-based background animation driven by <code>requestAnimationFrame</code> instead
+                                of <code>setInterval</code>, synchronized with the display refresh rate for smooth 60
+                                FPS.</p>
+                        </div>
+                    </div>
+                    <div class="stack-item">
+                        <span class="stack-icon">🚀</span>
+                        <div>
+                            <strong>Infrastructure &amp; CI/CD</strong><br>
+                            <span>Git · GitHub Pages</span>
+                            <p>Strict version control with Git. Auto-deploy via GitHub Pages — every push to
+                                <code>main</code> instantly goes live in production.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Deep-dive: Design -->
+            <div class="site-modal-section">
+                <h3>🎨 UI/UX & CSS Architecture</h3>
+                <ul class="resume-highlights">
+                    <li>
+                        <strong>Glassmorphism Engine:</strong> The frosted-glass UI is achieved entirely via the CSS
+                        <code>backdrop-filter</code> property — no pre-rendered background images or heavy assets
+                        required.
+                    </li>
+                    <li>
+                        <strong>Maintainable Theming:</strong> All palette values are stored in CSS Custom Properties
+                        (variables), making global style changes a single-line edit.
+                    </li>
+                    <li>
+                        <strong>Responsive Layout:</strong> A mobile-first strategy using CSS Grid and Flexbox ensures
+                        the layout scales flawlessly from small phones to wide desktop monitors.
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Deep-dive: JS -->
+            <div class="site-modal-section">
+                <h3>⚡ JavaScript Performance &amp; Memory Management</h3>
+                <ul class="resume-highlights">
+                    <li>
+                        <strong>Thread Optimization:</strong> The dynamic physics-based background animation is driven
+                        by <code>requestAnimationFrame</code> — not <code>setInterval</code> — synchronizing
+                        every frame with the hardware display refresh rate and guaranteeing smooth 60 FPS rendering
+                        without blocking the main thread.
+                    </li>
+                    <li>
+                        <strong>Garbage Collection Handling:</strong> A strict cleanup mechanism monitors the lifecycle
+                        of every animated DOM element. Once an element moves off-screen, it is immediately removed from
+                        the DOM and cleared from tracking arrays — preventing memory leaks and reducing the Garbage
+                        Collector's workload.
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Engineering decisions -->
+            <div class="site-modal-section">
+                <h3>🧠 Key Engineering Decisions</h3>
+                <ul class="esvitlo-achievements resume-achievements">
+                    <li><strong>No Framework Overhead:</strong> Vanilla stack was chosen deliberately to avoid
+                        React/Angular overhead, keeping the bundle at near-zero bytes and page load near-instant.</li>
+                    <li><strong>Frutiger Aero Aesthetic:</strong> The "Cyber Glacier" Glassmorphism design language was
+                        implemented entirely in CSS without any third-party UI libraries.</li>
+                    <li><strong>Fluid Animations at 60 FPS:</strong> <code>requestAnimationFrame</code>-based loop
+                        ensures animations are hardware-synchronized and never cause jank or dropped frames.</li>
+                    <li><strong>GitHub Pages CI/CD:</strong> Zero-configuration deployment pipeline — pushing to
+                        <code>main</code> auto-publishes to production with no manual steps.
+                    </li>
+                </ul>
+            </div>
+
+            <a href="https://den-dragonio.github.io/cyber-glacier-resume/" target="_blank"
+                class="site-modal-btn resume-btn">🔗 Visit Website</a>
+        </div>
+    </div>
+
+    <!-- Modal: eSvitlo -->
+    <div id="modal-esvitlo" class="site-modal-overlay" onclick="closeSiteModal(event, 'modal-esvitlo')">
+        <div class="site-modal site-modal--wide">
+            <button class="site-modal-close" onclick="closeSiteModalBtn('modal-esvitlo')">&times;</button>
+            <div class="site-modal-badge monitor-badge">IoT · Full-Stack · Utility</div>
+            <h2>💡 E-Svitlo — Real-Time IoT Power Outage Monitor</h2>
+            <a href="https://esvitlo-web.onrender.com/" target="_blank"
+                class="site-modal-url">esvitlo-web.onrender.com</a>
+
+            <!-- About -->
+            <div class="site-modal-section">
+                <h3>About the Project</h3>
+                <p>
+                    E-Svitlo is a full-stack IoT system for real-time electricity outage monitoring and instant
+                    Telegram alerts. A physical ESP8266 microcontroller connected to the apartment's home network
+                    sends a heartbeat to Firebase every 15 seconds. A Node.js backend continuously analyses these
+                    heartbeats and notifies subscribed users via Telegram the moment power goes out or comes back.
+                    A responsive web dashboard shows the live status and a Chart.js power availability history.
+                </p>
+            </div>
+
+            <!-- Tech Stack -->
+            <div class="site-modal-section">
+                <h3>⚙️ Core Components &amp; Tech Stack</h3>
+                <div class="esvitlo-stack-grid">
+                    <div class="stack-item">
+                        <span class="stack-icon">🔌</span>
+                        <div>
+                            <strong>Hardware Node</strong><br>
+                            <span>ESP8266 · C++ · Arduino IDE</span>
+                            <p>Sends an HTTP PUT to Firebase every 15 s, updating a <code>last_heartbeat</code>
+                                timestamp. Acts as a "dumb" scout with minimal failure points.</p>
+                        </div>
+                    </div>
+                    <div class="stack-item">
+                        <span class="stack-icon">🔥</span>
+                        <div>
+                            <strong>Database</strong><br>
+                            <span>Firebase Realtime Database</span>
+                            <p>Single source of truth — stores live heartbeat, state-change history, and user
+                                notification preferences.</p>
+                        </div>
+                    </div>
+                    <div class="stack-item">
+                        <span class="stack-icon">🟢</span>
+                        <div>
+                            <strong>Backend Application</strong><br>
+                            <span>Node.js · Express · Telegraf</span>
+                            <p>Polls Firebase every 30 s, calculates durations, handles edge cases, writes history, and
+                                dispatches Telegram notifications.</p>
+                        </div>
+                    </div>
+                    <div class="stack-item">
+                        <span class="stack-icon">🌐</span>
+                        <div>
+                            <strong>Web Dashboard</strong><br>
+                            <span>HTML · CSS · Vanilla JS · Chart.js</span>
+                            <p>Responsive, iOS-styled interface. Connects to Firebase via WebSockets for zero-latency
+                                updates. Includes Telegram Login Widget.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Architecture Diagrams carousel -->
+            <div class="site-modal-section">
+                <h3>📐 Architecture &amp; Workflow Diagrams</h3>
+                <div class="diag-carousel">
+                    <button class="diag-btn diag-prev" onclick="diagSlide('esvitlo', -1)">&#10094;</button>
+                    <div class="diag-track" id="diag-esvitlo">
+                        <div class="diag-slide active">
+                            <img src="img/ESVITLO/Component Diagram.png" alt="Component Diagram">
+                            <p class="diag-caption"><strong>2.1 Component Diagram</strong> — Decoupled, event-driven
+                                architecture of the system.</p>
+                        </div>
+                        <div class="diag-slide">
+                            <img src="img/ESVITLO/Sequence Diagram.png" alt="Sequence Diagram">
+                            <p class="diag-caption"><strong>2.2 Sequence Diagram</strong> — Fault-tolerant outage
+                                detection with a 5-minute buffer against false positives.</p>
+                        </div>
+                        <div class="diag-slide">
+                            <img src="img/ESVITLO/Deployment Diagram.png" alt="Deployment Diagram">
+                            <p class="diag-caption"><strong>2.3 Deployment Diagram</strong> — Distributed architecture
+                                across local hardware, cloud, and third-party APIs.</p>
+                        </div>
+                        <div class="diag-slide">
+                            <img src="img/ESVITLO/State Machine Diagram.png" alt="State Machine Diagram">
+                            <p class="diag-caption"><strong>2.4 State Machine</strong> — Introduces a "Pending Outage"
+                                buffer state to eliminate false positives from ISP latency.</p>
+                        </div>
+                        <div class="diag-slide">
+                            <img src="img/ESVITLO/Entity-Control (Class) Diagram.png" alt="Entity-Control Diagram">
+                            <p class="diag-caption"><strong>2.5 Entity-Control Diagram</strong> — Firebase data
+                                structures &amp; Node.js module mapping with clear separation of concerns.</p>
+                        </div>
+                        <div class="diag-slide">
+                            <img src="img/ESVITLO/Activity Diagram.png" alt="Activity Diagram">
+                            <p class="diag-caption"><strong>2.6 Activity Diagram</strong> — Backend monitoring loop:
+                                fetch heartbeat → calculate delta → log history → dispatch Telegram alerts.</p>
+                        </div>
+                    </div>
+                    <button class="diag-btn diag-next" onclick="diagSlide('esvitlo', 1)">&#10095;</button>
+                </div>
+                <div class="diag-dots" id="dots-esvitlo">
+                    <span class="diag-dot active" onclick="diagGoTo('esvitlo',0)"></span>
+                    <span class="diag-dot" onclick="diagGoTo('esvitlo',1)"></span>
+                    <span class="diag-dot" onclick="diagGoTo('esvitlo',2)"></span>
+                    <span class="diag-dot" onclick="diagGoTo('esvitlo',3)"></span>
+                    <span class="diag-dot" onclick="diagGoTo('esvitlo',4)"></span>
+                    <span class="diag-dot" onclick="diagGoTo('esvitlo',5)"></span>
+                </div>
+            </div>
+
+            <!-- Key Engineering Achievements -->
+            <div class="site-modal-section">
+                <h3>🏆 Key Engineering Achievements</h3>
+                <ul class="esvitlo-achievements">
+                    <li><strong>Fault Tolerance &amp; Debouncing:</strong> 5-minute threshold logic eliminates false
+                        notifications caused by unstable Wi-Fi and ISP packet loss, while maintaining accurate downtime
+                        tracking.</li>
+                    <li><strong>Decoupled Architecture:</strong> The web dashboard reads directly from Firebase, so
+                        users see live status and historical graphs even if the Node.js backend goes down temporarily.
+                    </li>
+                    <li><strong>Efficient State Management:</strong> <code>lastKnownStatus</code> is held in memory;
+                        precise outage durations are derived by diffing the last hardware heartbeat timestamp against
+                        recovery time.</li>
+                    <li><strong>Secure Authentication:</strong> Native Telegram Login Widget integration — user data is
+                        passed to the Node.js API to set notification preferences without a separate password system.
+                    </li>
+                    <li><strong>Hardware/Software Integration:</strong> Bridges low-level C++ network requests (ESP8266)
+                        with a modern Cloud/NoSQL environment and a high-level JavaScript application.</li>
+                </ul>
+            </div>
+
+            <!-- Trade-offs -->
+            <div class="site-modal-section">
+                <h3>⚠️ Technical Trade-offs &amp; Limitations</h3>
+                <ul class="esvitlo-tradeoffs">
+                    <li><strong>Polling vs. Event-Driven:</strong> Polling every 30 s is reliable for an MVP but would
+                        generate excessive Firebase reads at scale. Future migration: Firebase Cloud Functions or
+                        server-side <code>.on('value')</code> listeners.</li>
+                    <li><strong>Free-Tier Infrastructure:</strong> UptimeRobot keeps the Render backend awake —
+                        acceptable for now but requires refactoring on a dedicated VPS.</li>
+                    <li><strong>Hardware "Blind Spot":</strong> The ESP8266 cannot distinguish a power outage from an
+                        ISP failure. If power is present but the internet drops, the system logs it as an outage.</li>
+                </ul>
+            </div>
+
+            <!-- Conclusion -->
+            <div class="site-modal-section">
+                <h3>📝 Conclusion</h3>
+                <p>
+                    E-Svitlo demonstrates full-stack development skills and a deep understanding of distributed systems
+                    —
+                    integrating low-level hardware with modern web technologies, designing resilient cloud
+                    architectures,
+                    and making pragmatic engineering decisions to deliver a reliable product despite infrastructure
+                    constraints.
+                </p>
+            </div>
+
+            <a href="https://esvitlo-web.onrender.com/" target="_blank" class="site-modal-btn monitor-btn">🔗 Visit
+                Website</a>
+        </div>
+    </div>
+
+    <!-- Modal: Chess Library -->
+    <div id="modal-chess" class="site-modal-overlay" onclick="closeSiteModal(event, 'modal-chess')">
+        <div class="site-modal site-modal--wide">
+            <button class="site-modal-close" onclick="closeSiteModalBtn('modal-chess')">&times;</button>
+            <div class="site-modal-badge chess-badge">Library · Full-Stack · Cloud</div>
+            <h2>♟️ Chess Vault Web — Chess Literature Library</h2>
+            <a href="https://chess-lib.onrender.com/" target="_blank" class="site-modal-url">chess-lib.onrender.com</a>
+
+            <!-- Overview -->
+            <div class="site-modal-section">
+                <h3>About the Project</h3>
+                <p>
+                    Chess Vault Web is a responsive web application designed to host and manage a vast library of
+                    chess literature. It leverages modern cloud technologies to provide real-time updates and secure
+                    access to resources. The UI is built with a mobile-first approach to ensure a high-quality
+                    reading experience on any device.
+                </p>
+            </div>
+
+            <!-- Tech Stack -->
+            <div class="site-modal-section">
+                <h3>⚙️ Key Technical Processes</h3>
+                <div class="esvitlo-stack-grid">
+                    <div class="stack-item">
+                        <span class="stack-icon">🚀</span>
+                        <div>
+                            <strong>Version Control &amp; CI/CD</strong><br>
+                            <span>GitHub · Render</span>
+                            <p>Repository hosted on GitHub. Render auto-deploys on every commit to <code>main</code>,
+                                keeping the live site always up to date.</p>
+                        </div>
+                    </div>
+                    <div class="stack-item">
+                        <span class="stack-icon">⚡</span>
+                        <div>
+                            <strong>Real-Time Data</strong><br>
+                            <span>Firebase Firestore · onSnapshot</span>
+                            <p>A "News" system tracks library updates (new sections A, B, VGD…). <code>onSnapshot</code>
+                                listeners reflect changes instantly — no page reload needed.</p>
+                        </div>
+                    </div>
+                    <div class="stack-item">
+                        <span class="stack-icon">🔒</span>
+                        <div>
+                            <strong>Security Architecture</strong><br>
+                            <span>Google Cloud · Firebase Auth · Firestore Rules</span>
+                            <p>API keys restricted to authorized HTTP referrers. Domain whitelisting in Firebase Auth.
+                                Granular Firestore rules: public read, admin-only write.</p>
+                        </div>
+                    </div>
+                    <div class="stack-item">
+                        <span class="stack-icon">📱</span>
+                        <div>
+                            <strong>Mobile-First UI</strong><br>
+                            <span>HTML · CSS · Media Queries · Vanilla JS</span>
+                            <p>Built with a mobile-first approach using CSS Media Queries to guarantee readability and
+                                usability on small screens.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Diagrams carousel -->
+            <div class="site-modal-section">
+                <h3>📐 UML Diagrams</h3>
+                <div class="diag-carousel">
+                    <button class="diag-btn diag-prev" onclick="diagSlide('chess', -1)">&#10094;</button>
+                    <div class="diag-track" id="diag-chess">
+                        <div class="diag-slide active">
+                            <img src="img/chess-lib/System Architecture Diagram.png" alt="System Architecture Diagram">
+                            <p class="diag-caption"><strong>1. System Architecture Diagram</strong> — How GitHub,
+                                Render, and Firebase interact within the project.</p>
+                        </div>
+                        <div class="diag-slide">
+                            <img src="img/chess-lib/News Update Sequence Diagram.png"
+                                alt="News Update Sequence Diagram">
+                            <p class="diag-caption"><strong>2. News Update Sequence Diagram</strong> — How adding a new
+                                chess section (e.g., "VGD") propagates from admin to end user in real time.</p>
+                        </div>
+                    </div>
+                    <button class="diag-btn diag-next" onclick="diagSlide('chess', 1)">&#10095;</button>
+                </div>
+                <div class="diag-dots" id="dots-chess">
+                    <span class="diag-dot active" onclick="diagGoTo('chess',0)"></span>
+                    <span class="diag-dot" onclick="diagGoTo('chess',1)"></span>
+                </div>
+            </div>
+
+            <!-- Key Skills -->
+            <div class="site-modal-section">
+                <h3>🎓 Key Skills Demonstrated</h3>
+                <ul class="esvitlo-achievements chess-achievements">
+                    <li><strong>Full-Stack Integration:</strong> Connecting a frontend UI with a NoSQL Firebase backend
+                        to handle real-time data updates via <code>onSnapshot</code> listeners.</li>
+                    <li><strong>Cloud Security:</strong> Implementing API key restrictions, domain whitelisting, and
+                        Firestore rules to protect resources — read-only for public, write-only for admin.</li>
+                    <li><strong>Responsive Design:</strong> Mobile-first CSS ensures a high-quality user experience
+                        across all screen sizes and devices.</li>
+                    <li><strong>Infrastructure Management:</strong> Configuring an automated CI/CD pipeline via GitHub +
+                        Render for efficient and reliable deployments on every commit.</li>
+                </ul>
+            </div>
+
+            <a href="https://chess-lib.onrender.com/" target="_blank" class="site-modal-btn chess-btn">🔗 Visit
+                Website</a>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        function openSiteModal(id) {
+            document.getElementById('modal-' + id).classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeSiteModalBtn(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        function closeSiteModal(event, modalId) {
+            if (event.target === document.getElementById(modalId)) {
+                document.getElementById(modalId).classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        }
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.site-modal-overlay.active').forEach(function (m) {
+                    m.classList.remove('active');
+                });
+                document.body.style.overflow = '';
+            }
+        });
+
+        /* ---- Diagram Carousel ---- */
+        var diagIndex = {};
+        function diagSlide(id, dir) {
+            var track = document.getElementById('diag-' + id);
+            var slides = track.querySelectorAll('.diag-slide');
+            var n = slides.length;
+            var cur = diagIndex[id] || 0;
+            slides[cur].classList.remove('active');
+            cur = (cur + dir + n) % n;
+            diagIndex[id] = cur;
+            slides[cur].classList.add('active');
+            updateDots(id, cur, n);
+        }
+        function diagGoTo(id, idx) {
+            var track = document.getElementById('diag-' + id);
+            var slides = track.querySelectorAll('.diag-slide');
+            var cur = diagIndex[id] || 0;
+            slides[cur].classList.remove('active');
+            slides[idx].classList.add('active');
+            diagIndex[id] = idx;
+            updateDots(id, idx, slides.length);
+        }
+        function updateDots(id, cur, n) {
+            var dots = document.querySelectorAll('#dots-' + id + ' .diag-dot');
+            dots.forEach(function (d, i) {
+                d.classList.toggle('active', i === cur);
+            });
+        }
+    </script>
 
 </body>
 
