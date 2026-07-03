@@ -51,6 +51,11 @@
                     <p>A text-to-Morse code translator and back. Written in Python.</p>
                 </a>
 
+                <a href="surv2d.html" class="app-card surv2d-style">
+                    <h2>Surv2D</h2>
+                    <p>A 2D top-down survival game built with Lua and LÖVE. Fight off waves of zombies, build bases, upgrade equipment, and defeat bosses.</p>
+                </a>
+
                 <div class="app-card placeholder">
                     <h2>+</h2>
                     <p>A new app is coming soon</p>
@@ -105,6 +110,19 @@
                 <p class="site-desc">My personal digital library of chess books — browse, filter, and discover great
                     reads.</p>
                 <button class="read-more-btn" onclick="openSiteModal('chess')">📖 Read detailed info</button>
+            </div>
+
+            <!-- Site 4: Surv2D Game -->
+            <div class="site-card">
+                <div class="site-card-header">
+                    <span class="site-icon">🧟</span>
+                    <div>
+                        <a href="https://den-dragonio.github.io/surv2d/" target="_blank" class="site-link">Surv2D Game</a>
+                        <span class="site-badge" style="background-color: #33691e; color: white;">Lua Game</span>
+                    </div>
+                </div>
+                <p class="site-desc">A 2D survival game where you fight off zombies, build defenses, and defeat epic bosses directly in your browser.</p>
+                <button class="read-more-btn" onclick="openSiteModal('surv2d')">📖 Read detailed info</button>
             </div>
 
         </aside>
@@ -514,6 +532,114 @@
 
             <a href="https://chess-lib.onrender.com/" target="_blank" class="site-modal-btn chess-btn">🔗 Visit
                 Website</a>
+        </div>
+    </div>
+
+    <!-- Modal: Surv2D -->
+    <div id="modal-surv2d" class="site-modal-overlay" onclick="closeSiteModal(event, 'modal-surv2d')">
+        <div class="site-modal site-modal--wide">
+            <button class="site-modal-close" onclick="closeSiteModalBtn('modal-surv2d')">&times;</button>
+            <div class="site-modal-badge" style="background-color: #33691e; color: white;">Lua · LÖVE2D · HTML5 WebAssembly</div>
+            <h2>🧟 Surv2D — 2D Zombie Survival & Base Builder</h2>
+            <a href="https://den-dragonio.github.io/surv2d/" target="_blank"
+                class="site-modal-url">den-dragonio.github.io/surv2d</a>
+
+            <!-- Overview -->
+            <div class="site-modal-section">
+                <h3>About the Project</h3>
+                <p>
+                    Surv2D is a retro-styled 2D top-down survival game built from scratch using the LÖVE framework in Lua.
+                    It offers high-intensity action where players fight hordes of zombies, construct defenses (walls, gates, automated turrets),
+                    forge/enchant equipment, and engage in epic boss battles.
+                    The web build compiles the Lua code to WebAssembly/WebGL using love.js to deliver zero-install gameplay directly in the browser,
+                    while maintaining full hardware-accelerated 60 FPS performance.
+                </p>
+            </div>
+
+            <!-- Tech Stack -->
+            <div class="site-modal-section">
+                <h3>⚙️ Tech Stack &amp; Architecture</h3>
+                <div class="esvitlo-stack-grid">
+                    <div class="stack-item">
+                        <span class="stack-icon">🌙</span>
+                        <div>
+                            <strong>Game Engine</strong><br>
+                            <span>LÖVE (Love2D) · Lua</span>
+                            <p>A fast, lightweight 2D gaming framework. Entire entity component system, collision mechanics, A* pathfinding, and UI are hand-coded in Lua.</p>
+                        </div>
+                    </div>
+                    <div class="stack-item">
+                        <span class="stack-icon">🕸️</span>
+                        <div>
+                            <strong>Web Platform</strong><br>
+                            <span>WebAssembly · WebGL · love.js</span>
+                            <p>Ported to the web via <code>love.js</code>, compiling the LÖVE runtime to WebAssembly and mapping canvas drawing calls directly to WebGL APIs.</p>
+                        </div>
+                    </div>
+                    <div class="stack-item">
+                        <span class="stack-icon">⚡</span>
+                        <div>
+                            <strong>Performance</strong><br>
+                            <span>Static Cache · Canvas Scaling</span>
+                            <p>Optimized asset-loading pipeline. Custom scale-independent layout ensures retro pixel-art rendering stays razor sharp at any aspect ratio.</p>
+                        </div>
+                    </div>
+                    <div class="stack-item">
+                        <span class="stack-icon">🛠️</span>
+                        <div>
+                            <strong>CI/CD &amp; Deployment</strong><br>
+                            <span>GitHub Actions · GitHub Pages</span>
+                            <p>Automated workflow bundles the project assets, packages them into a LÖVE archive, builds the HTML5 player, and deploys it straight to GitHub Pages.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Diagrams/Screenshots carousel -->
+            <div class="site-modal-section">
+                <h3>📷 Game Screens</h3>
+                <div class="diag-carousel">
+                    <button class="diag-btn diag-prev" onclick="diagSlide('surv2d', -1)">&#10094;</button>
+                    <div class="diag-track" id="diag-surv2d">
+                        <div class="diag-slide active">
+                            <img src="img/surv2d/logo.png" alt="Surv2D Title Screen">
+                            <p class="diag-caption"><strong>1. Title Screen</strong> — Atmospheric pixel art splash screen and main menu.</p>
+                        </div>
+                        <div class="diag-slide">
+                            <img src="img/surv2d/gameplay_combat.png" alt="Surv2D Combat Gameplay">
+                            <p class="diag-caption"><strong>2. High-intensity Combat</strong> — Player defending against hordes of zombies with floating damage numbers.</p>
+                        </div>
+                        <div class="diag-slide">
+                            <img src="img/surv2d/base_defense.png" alt="Base Defense and Building">
+                            <p class="diag-caption"><strong>3. Base Fortification</strong> — Fortifying defenses with automated turrets shooting arrows, fences, and campfire healing.</p>
+                        </div>
+                        <div class="diag-slide">
+                            <img src="img/surv2d/crafting_shop.png" alt="Crafting Recipes and UI">
+                            <p class="diag-caption"><strong>4. Crafting &amp; Forge UI</strong> — Managing and crafting weapons, armor, and base structures with copper, wood, and iron.</p>
+                        </div>
+                    </div>
+                    <button class="diag-btn diag-next" onclick="diagSlide('surv2d', 1)">&#10095;</button>
+                </div>
+                <div class="diag-dots" id="dots-surv2d">
+                    <span class="diag-dot active" onclick="diagGoTo('surv2d',0)"></span>
+                    <span class="diag-dot" onclick="diagGoTo('surv2d',1)"></span>
+                    <span class="diag-dot" onclick="diagGoTo('surv2d',2)"></span>
+                    <span class="diag-dot" onclick="diagGoTo('surv2d',3)"></span>
+                </div>
+            </div>
+
+            <!-- Key Features -->
+            <div class="site-modal-section">
+                <h3>🏆 Key Features &amp; Achievements</h3>
+                <ul class="esvitlo-achievements surv2d-achievements">
+                    <li style="border-left-color: #33691e; background: #f1f8e9;"><strong>Dynamic Base Construction:</strong> Drop walls, gates, and automated crossbow turrets to secure your compound against night raids.</li>
+                    <li style="border-left-color: #33691e; background: #f1f8e9;"><strong>Complex Entity AI:</strong> Advanced A* pathfinding and flocking behavior allow zombie hordes to locate breaches, flank obstacles, and target structures.</li>
+                    <li style="border-left-color: #33691e; background: #f1f8e9;"><strong>Deep Gear RPG Progression:</strong> Forge copper/iron/mythril gear and unlock powerful stats with passive emblems (combat speed, stamina regeneration, double strike).</li>
+                    <li style="border-left-color: #33691e; background: #f1f8e9;"><strong>Cross-Platform Codebase:</strong> High performance on WebGL (browser) and absolute portability for native Windows, macOS, and Linux executables.</li>
+                </ul>
+            </div>
+
+            <a href="https://den-dragonio.github.io/surv2d/" target="_blank" class="site-modal-btn" style="background-color: #33691e; color: white;">🔗 Play in Browser</a>
         </div>
     </div>
 

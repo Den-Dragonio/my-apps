@@ -751,3 +751,31 @@ footer {
     background: #dce8ff;
     color: #1a47b8;
 }
+
+/* =============================================
+   SURV2D CARD & DETAIL STYLES
+   ============================================= */
+
+.surv2d-style {
+    background: linear-gradient(135deg, #ffffff 0%, #f1f8e9 100%);
+    border: 1px solid #dcedc8;
+}
+
+.surv2d-style:hover {
+    background: linear-gradient(135deg, #f9fbe7 0%, #dcedc8 100%);
+    transform: translateY(-5px);
+}
+
+.surv2d-style h2 {
+    color: #33691e;
+}
+
+.surv2d-badge {
+    background-color: #33691e;
+    color: white;
+}
+
+/* Surv2D detail page custom roadmap border */
+.roadmap-box-surv2d {
+    border-left: 4px solid #33691e !important;
+}
