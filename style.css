@@ -395,13 +395,97 @@ footer {
     background: #fff;
     border-radius: 14px;
     padding: 36px 40px 32px 40px;
-    max-width: 560px;
+    max-width: min(760px, 94dvw);
     width: 100%;
-    max-height: 85vh;
+    max-height: 92dvh;
     overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    container-type: scroll-state;
     position: relative;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
     animation: modalIn 0.22s ease;
+}
+
+@supports not (scrollbar-width: none) {
+    .site-modal {
+        scrollbar-width: auto;
+    }
+
+    .site-modal::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+.site-modal::before,
+.site-modal::after {
+    content: "";
+    display: block;
+    position: sticky;
+    block-size: 0.85rem;
+    z-index: 2;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.site-modal::before {
+    inset-block-start: -36px;
+    margin-block-end: -0.85rem;
+    background: radial-gradient(farthest-side at 50% 0, rgb(15 23 42 / 0.28), transparent);
+}
+
+.site-modal::after {
+    inset-block-end: -32px;
+    margin-block-start: -0.85rem;
+    background: radial-gradient(farthest-side at 50% 100%, rgb(15 23 42 / 0.28), transparent);
+}
+
+@container scroll-state(scrollable: block-start) {
+    .site-modal::before {
+        opacity: 1;
+    }
+}
+
+@container scroll-state(scrollable: block-end) {
+    .site-modal::after {
+        opacity: 1;
+    }
+}
+
+@supports not (container-type: scroll-state) {
+    .site-modal::before,
+    .site-modal::after {
+        animation: modalScrollShadow linear both;
+        animation-timeline: scroll();
+    }
+
+    .site-modal::before {
+        animation-range: 0 2rem;
+    }
+
+    .site-modal::after {
+        animation-direction: reverse;
+        animation-range: calc(100% - 2rem) 100%;
+    }
+}
+
+@keyframes modalScrollShadow {
+    to {
+        opacity: 1;
+    }
+}
+
+@supports not ((container-type: scroll-state) or (animation-timeline: scroll())) {
+    .site-modal {
+        background:
+            linear-gradient(#ffffff 30%, transparent) top / 100% 2.2rem no-repeat local,
+            linear-gradient(transparent, #ffffff 70%) bottom / 100% 2.2rem no-repeat local,
+            radial-gradient(farthest-side at 50% 0, rgb(15 23 42 / 0.28), transparent) top / 100% 0.85rem no-repeat scroll,
+            radial-gradient(farthest-side at 50% 100%, rgb(15 23 42 / 0.28), transparent) bottom / 100% 0.85rem no-repeat scroll,
+            #ffffff;
+    }
 }
 
 @keyframes modalIn {
@@ -420,6 +504,7 @@ footer {
     position: absolute;
     top: 14px;
     right: 16px;
+    z-index: 3;
     background: none;
     border: none;
     font-size: 1.5rem;
@@ -519,7 +604,7 @@ footer {
    ESVITLO MODAL — Wide variant
    ============================================= */
 .site-modal--wide {
-    max-width: 720px;
+    max-width: min(1040px, 94dvw);
 }
 
 /* ---- Tech Stack grid ---- */
@@ -608,10 +693,157 @@ footer {
 .diag-slide img {
     width: 100%;
     height: auto;
-    max-height: 300px;
+    max-height: 440px;
     object-fit: contain;
     padding: 8px;
     box-sizing: border-box;
+    display: block;
+    transition: transform 0.2s ease;
+}
+
+.diag-zoom-trigger {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 0;
+    border: none;
+    background: transparent;
+    cursor: zoom-in;
+}
+
+.diag-zoom-trigger:hover img,
+.diag-zoom-trigger:focus-visible img {
+    transform: scale(1.015);
+}
+
+.diag-zoom-badge {
+    position: absolute;
+    right: 12px;
+    bottom: 12px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: rgba(15, 23, 42, 0.8);
+    color: #ffffff;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+    opacity: 0.88;
+    pointer-events: none;
+    transition: opacity 0.15s ease, transform 0.15s ease, background 0.15s ease;
+}
+
+.diag-zoom-trigger:hover .diag-zoom-badge,
+.diag-zoom-trigger:focus-visible .diag-zoom-badge {
+    opacity: 1;
+    background: rgba(15, 23, 42, 0.96);
+    transform: scale(1.04);
+}
+
+/* Native <dialog> Lightbox for Site Diagrams & Screens */
+dialog.site-lightbox {
+    margin: auto;
+    padding: 16px;
+    border: none;
+    border-radius: 12px;
+    background: #0f172a;
+    color: #f8fafc;
+    max-width: 96dvw;
+    max-height: 94dvh;
+    width: min(1240px, 96dvw);
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.55);
+}
+
+dialog.site-lightbox[open] {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+dialog.site-lightbox:modal {
+    overscroll-behavior: contain;
+}
+
+dialog.site-lightbox::backdrop {
+    background: rgba(2, 6, 23, 0.88);
+    overflow: hidden;
+    overscroll-behavior: contain;
+}
+
+.site-lightbox-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.site-lightbox-caption {
+    font-size: 0.92rem;
+    color: #e2e8f0;
+    margin: 0;
+}
+
+.site-lightbox-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.site-lightbox-btn {
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    background: rgba(30, 41, 59, 0.9);
+    color: #ffffff;
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-size: 0.84rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.15s ease;
+}
+
+.site-lightbox-btn:hover {
+    background: rgba(51, 65, 85, 0.95);
+}
+
+.site-lightbox-stage {
+    overflow: auto;
+    max-height: 80dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 12px;
+    overscroll-behavior: contain;
+}
+
+.site-lightbox-stage.is-zoomed {
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.site-lightbox-img {
+    max-width: 100%;
+    max-height: 76dvh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    cursor: zoom-in;
+    display: block;
+}
+
+.site-lightbox-stage.is-zoomed .site-lightbox-img {
+    max-width: none;
+    max-height: none;
+    width: auto;
+    height: auto;
+    cursor: zoom-out;
 }
 
 .diag-caption {

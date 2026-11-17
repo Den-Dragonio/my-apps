@@ -4,17 +4,554 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connect4 3D (Unity) - Play</title>
+    <title>Connect 4 — 3D (Lua / LÖVE) — Play Online &amp; Download</title>
     <link rel="icon" type="image/png" href="img/icon.png">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="details.css">
+    <style>
+        .site-brand {
+            margin: 0;
+            font-size: 2rem;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .game-cover img {
+            height: auto;
+            aspect-ratio: 1 / 1;
+            border-radius: 18px;
+        }
+
+        .update-tag--lua {
+            background: #e8eaf6;
+            color: #283593;
+            font-weight: 700;
+        }
+
+        .game-info h1 {
+            font-size: clamp(1.65rem, 1.2rem + 1.6vw, 2.25rem);
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 18px;
+        }
+
+        .action-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 11px 20px;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            text-decoration: none;
+            color: #ffffff;
+            transition: transform 0.15s ease, filter 0.15s ease;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.06);
+        }
+
+        .action-btn--online {
+            background: linear-gradient(180deg, #2196f3 0%, #1565c0 100%);
+            box-shadow: 0 3px 0 #0d47a1;
+        }
+
+        .action-btn--downloads {
+            background: linear-gradient(180deg, #ef5350 0%, #c62828 100%);
+            box-shadow: 0 3px 0 #8e0000;
+        }
+
+        .action-btn--source {
+            background: linear-gradient(180deg, #546e7a 0%, #37474f 100%);
+            box-shadow: 0 3px 0 #263238;
+        }
+
+        .description--spaced {
+            margin-top: 10px;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        .feature-card {
+            background: #f9fafc;
+            border: 1px solid #e4e7ee;
+            border-left: 4px solid #c62828;
+            border-radius: 8px;
+            padding: 16px;
+        }
+
+        .feature-card h3 {
+            margin: 0 0 8px 0;
+            font-size: 1.05rem;
+            color: #2c3e50;
+        }
+
+        .feature-card p {
+            margin: 0;
+            font-size: 0.92rem;
+            color: #4a5568;
+            line-height: 1.55;
+        }
+
+        .custom-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        .custom-box {
+            background: #fffafa;
+            border: 1px solid #f2dede;
+            border-radius: 8px;
+            padding: 16px;
+        }
+
+        .custom-box h3 {
+            margin: 0 0 10px 0;
+            font-size: 1.02rem;
+            color: #b71c1c;
+        }
+
+        .custom-box ul {
+            margin: 0;
+            padding-left: 18px;
+            color: #444;
+            font-size: 0.92rem;
+            line-height: 1.65;
+        }
+
+        .rules-card {
+            background: #fff8f8;
+            padding: 20px;
+            border-left: 4px solid #ff5252;
+            border-radius: 6px;
+            color: #444;
+        }
+
+        .rules-card ol {
+            margin: 0;
+            padding-left: 20px;
+            line-height: 1.75;
+        }
+
+        /* Responsive Controls Table */
+        .table-wrapper {
+            overflow: auto;
+            max-inline-size: 100%;
+            margin-top: 14px;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            container-type: inline-size;
+        }
+
+        .controls-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            text-align: left;
+            font-size: 0.94rem;
+            --label-1: "Input / Control";
+            --label-2: "Action";
+        }
+
+        .controls-table caption {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+            clip-path: inset(50%);
+            white-space: nowrap;
+        }
+
+        .controls-table thead th {
+            position: sticky;
+            inset-block-start: 0;
+            z-index: 1;
+            background: #f3f4f6;
+            color: #1f2937;
+            padding: 12px 14px;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        .controls-table tbody th,
+        .controls-table tbody td {
+            padding: 11px 14px;
+            border-bottom: 1px solid #eef0f4;
+            vertical-align: top;
+        }
+
+        .controls-table tbody th {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            font-weight: 700;
+            color: #c62828;
+            white-space: nowrap;
+            background: #ffffff;
+        }
+
+        @container (width < 520px) {
+            .controls-table,
+            .controls-table thead,
+            .controls-table tbody,
+            .controls-table tr,
+            .controls-table th,
+            .controls-table td {
+                display: block;
+            }
+
+            .controls-table thead {
+                display: none;
+            }
+
+            .controls-table tbody tr {
+                border-bottom: 1px solid #e5e7eb;
+                padding: 8px 0;
+            }
+
+            .controls-table tbody th {
+                position: sticky;
+                inset-block-start: 0;
+                z-index: 2;
+                background: #fafafa;
+                white-space: normal;
+                border-bottom: none;
+                padding-bottom: 4px;
+            }
+
+            .controls-table tbody th::before {
+                content: var(--label-1) ": ";
+                color: #555;
+                font-family: inherit;
+                font-weight: 600;
+            }
+
+            .controls-table tbody td {
+                border-bottom: none;
+                padding-top: 4px;
+            }
+
+            .controls-table tbody td::before {
+                content: var(--label-2) ": ";
+                font-weight: 600;
+                color: #555;
+            }
+        }
+
+        /* Screenshots Carousel Overrides */
+        .img-container {
+            height: auto;
+            aspect-ratio: 2560 / 1526;
+        }
+
+        .img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .slide-trigger {
+            display: block;
+            width: 100%;
+            padding: 0;
+            border: none;
+            background: transparent;
+            cursor: zoom-in;
+        }
+
+        .hero-preview-btn {
+            display: block;
+            width: 100%;
+            padding: 0;
+            border: none;
+            background: transparent;
+            cursor: zoom-in;
+        }
+
+        .hero-preview-btn img {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 2560 / 1526;
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .hero-preview-btn:hover img {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+        }
+
+        /* Downloads & Play Online Hub */
+        .download-footer--hub {
+            text-align: left;
+            padding: 28px;
+        }
+
+        .download-hub-header {
+            text-align: center;
+            margin-bottom: 22px;
+        }
+
+        .download-hub-header h2 {
+            margin: 0 0 8px 0;
+            color: #c62828;
+            font-size: clamp(1.35rem, 1.1rem + 0.9vw, 1.7rem);
+        }
+
+        .download-hub-header p {
+            margin: 0;
+            color: #555;
+            font-size: 0.95rem;
+        }
+
+        .online-banner {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            background: linear-gradient(135deg, #1a237e 0%, #1565c0 100%);
+            color: #ffffff;
+            padding: 20px 24px;
+            border-radius: 10px;
+            margin-bottom: 22px;
+            box-shadow: 0 6px 18px rgba(21, 101, 192, 0.22);
+        }
+
+        .online-banner h3 {
+            margin: 0 0 4px 0;
+            font-size: 1.2rem;
+            color: #ffffff;
+        }
+
+        .online-banner p {
+            margin: 0;
+            font-size: 0.92rem;
+            color: #dbeafe;
+        }
+
+        .online-play-cta {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: #ffffff;
+            color: #0d47a1;
+            font-weight: 800;
+            font-size: 1.02rem;
+            text-decoration: none;
+            padding: 13px 26px;
+            border-radius: 8px;
+            box-shadow: 0 4px 0 #90caf9;
+            transition: transform 0.15s ease;
+            white-space: nowrap;
+        }
+
+        .online-play-cta:hover {
+            transform: translateY(-2px);
+        }
+
+        .downloads-container {
+            container-type: inline-size;
+        }
+
+        .download-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(235px, 1fr));
+            gap: 16px;
+        }
+
+        .platform-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 18px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 14px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+
+        .platform-card-top h3 {
+            margin: 0 0 6px 0;
+            font-size: 1.08rem;
+            color: #1e293b;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+        }
+
+        .platform-badge {
+            font-size: 0.74rem;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 999px;
+            background: #f1f5f9;
+            color: #475569;
+        }
+
+        .platform-card-top p {
+            margin: 0;
+            font-size: 0.88rem;
+            color: #556070;
+            line-height: 1.5;
+        }
+
+        .platform-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .dl-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 10px 14px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-decoration: none;
+            color: #ffffff;
+            text-align: center;
+            transition: transform 0.15s ease, filter 0.15s ease;
+        }
+
+        .dl-btn:hover {
+            transform: translateY(-1px);
+            filter: brightness(1.06);
+        }
+
+        .dl-btn--win {
+            background: linear-gradient(180deg, #1e88e5 0%, #1565c0 100%);
+            box-shadow: 0 3px 0 #0d47a1;
+        }
+
+        .dl-btn--mac {
+            background: linear-gradient(180deg, #424242 0%, #212121 100%);
+            box-shadow: 0 3px 0 #000000;
+        }
+
+        .dl-btn--linux {
+            background: linear-gradient(180deg, #fb8c00 0%, #e65100 100%);
+            box-shadow: 0 3px 0 #bf360c;
+        }
+
+        .dl-btn--android {
+            background: linear-gradient(180deg, #43a047 0%, #2e7d32 100%);
+            box-shadow: 0 3px 0 #1b5e20;
+        }
+
+        .dl-btn--ios {
+            background: linear-gradient(180deg, #5e35b1 0%, #4527a0 100%);
+            box-shadow: 0 3px 0 #311b92;
+        }
+
+        .dl-btn--secondary {
+            background: #f1f5f9;
+            color: #1e293b;
+            border: 1px solid #cbd5e1;
+            box-shadow: none;
+            font-weight: 600;
+        }
+
+        .source-footer-row {
+            margin-top: 20px;
+            padding-top: 16px;
+            border-top: 1px solid #e2e8f0;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            font-size: 0.9rem;
+            color: #475569;
+        }
+
+        /* Native <dialog> Lightbox */
+        dialog.lightbox-dialog {
+            margin: auto;
+            padding: 0;
+            border: none;
+            background: transparent;
+            max-width: min(92dvw, 1100px);
+            max-height: 90dvh;
+            overflow: visible;
+        }
+
+        dialog.lightbox-dialog[open] {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        dialog.lightbox-dialog:modal {
+            overscroll-behavior: contain;
+        }
+
+        dialog.lightbox-dialog::backdrop {
+            background: rgba(12, 15, 22, 0.88);
+            overflow: hidden;
+            overscroll-behavior: contain;
+        }
+
+        .lightbox-img {
+            max-width: 100%;
+            max-height: 80dvh;
+            width: auto;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+        }
+
+        .lightbox-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            width: 100%;
+            color: #f8fafc;
+            font-size: 0.95rem;
+        }
+
+        .lightbox-close {
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            background: rgba(15, 23, 42, 0.85);
+            color: #ffffff;
+            border-radius: 6px;
+            padding: 6px 14px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .lightbox-close:hover {
+            background: rgba(30, 41, 59, 0.95);
+        }
+    </style>
 </head>
 
 <body>
 
     <header>
         <a href="index.html" class="logo-link">
-            <h1>My Apps</h1>
+            <p class="site-brand">My Apps</p>
         </a>
         <br>
         <a href="index.html" class="back-link">← Back to list</a>
@@ -22,215 +559,436 @@
 
     <main class="detail-container">
 
-        <div class="game-header">
+        <section class="game-header" aria-label="Game overview">
             <div class="game-cover">
-                <img src="img/connect4/logo.png" alt="Connect4 Unity Cover">
-                <div class="update-tag" style="background:#ffebee; color:#c62828;">Unity Engine</div>
+                <img src="img/connect4/logo.png" alt="Connect 4 3D Icon" width="512" height="512" fetchpriority="high">
+                <div class="update-tag update-tag--lua">Lua + LÖVE2D Engine</div>
             </div>
 
             <div class="game-info">
-                <h1>Connect4 3D</h1>
+                <h1>Connect 4 — 3D (4×4×4)</h1>
                 <ul class="meta-list">
-                    <li><strong>Engine:</strong> Unity 3D</li>
-                    <li><strong>Platform:</strong> Web (Browser) / Windows</li>
-                    <li><strong>Genre:</strong> Logic / Board Game</li>
-                    <li><strong>Controls:</strong> Mouse + Keyboard</li>
+                    <li><strong>Engine / Language:</strong> LÖVE (Love2D) 11.4 / 11.5 · Lua + Custom 3D GLSL Shaders</li>
+                    <li><strong>Platforms:</strong> Web (WebAssembly / PWA), Windows, macOS, Linux, Android, iOS</li>
+                    <li><strong>Modes:</strong> Online ELO, Play vs Bot (3 Tiers), Play vs Friend, LAN (UDP), Tournaments, Local PvP</li>
+                    <li><strong>Rule Variants:</strong> Standard (Gravity) &amp; Free (Any Height)</li>
+                    <li><strong>Languages:</strong> English &amp; Russian</li>
                 </ul>
 
                 <div class="requirements-box">
-                    <h3>System Requirements (PC):</h3>
-                    <p><strong>OS:</strong> Windows 10 / 11 (64-bit)</p>
-                    <p><strong>RAM:</strong> 2-4 GB</p>
-                    <p><strong>Web:</strong> Any modern browser (Chrome, Edge)</p>
+                    <h3>System Requirements:</h3>
+                    <p><strong>Web:</strong> Any modern browser with WebGL &amp; WebAssembly (Desktop, Android &amp; iOS Safari)</p>
+                    <p><strong>Desktop:</strong> Windows 7–11, macOS (Intel &amp; Apple Silicon), or Linux with LÖVE 11.4+</p>
+                    <p><strong>Mobile:</strong> Android APK or iOS (via Safari PWA / Xcode project bundle)</p>
+                </div>
+
+                <div class="hero-actions">
+                    <a href="https://connect4-3d-web.onrender.com/" target="_blank" rel="noopener noreferrer" class="action-btn action-btn--online">
+                        🌐 Play Online
+                    </a>
+                    <a href="#downloads" class="action-btn action-btn--downloads">
+                        📥 Download (Win / Mac / Linux / Android / iOS)
+                    </a>
+                    <a href="https://github.com/Den-Dragonio/connect-4-3d" target="_blank" rel="noopener noreferrer" class="action-btn action-btn--source">
+                        💻 GitHub Source
+                    </a>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <div class="content-section">
-            <h2 class="section-title">About the Game:</h2>
+        <section class="content-section">
+            <h2 class="section-title">About the Remake (Lua + LÖVE2D):</h2>
             <p class="description">
-                <strong>Connect4 3D</strong> is the classic logic duel, recreated on the powerful
-                <strong>Unity</strong> engine.
-                Preserving the spirit of the original, modern visuals, handy analysis tools, and satisfying
-                physics have been added.
+                <strong>Connect 4 — 3D</strong> has been completely rebuilt from the ground up in <strong>Lua</strong> on the
+                <strong>LÖVE2D</strong> engine with a custom 3D software-projected mesh pipeline and procedural <strong>GLSL shaders</strong>.
+                On a 4×4×4 cubic board (16 vertical pegs, 64 total cells, and 76 possible winning lines), every move becomes a spatial puzzle across rows, columns, and 3D diagonals.
             </p>
-            <p class="description" style="margin-top: 10px;">
-                The main goal is to form a line of 4 pieces of your color (vertically, horizontally, or diagonally).
-                The game offers a convenient interface with move history and highlighting so you can focus on
-                strategy.
+            <p class="description description--spaced">
+                Compared to the original prototype, this edition introduces <strong>3-tier Alpha-Beta AI bots</strong>,
+                <strong>real-time Online ELO matchmaking</strong> backed by Firebase, <strong>Friends &amp; 6-character Room Invites</strong>,
+                <strong>Swiss &amp; Knockout Tournaments with coin prize pools</strong>, <strong>LAN multiplayer</strong>, interactive <strong>Move Rewind &amp; Match Replays</strong>,
+                and a full 3D Shop filled with custom piece skins, themed boards, synthesized material sound effects, and adaptive UI themes.
             </p>
-        </div>
+        </section>
 
-        <div class="content-section">
-            <h2 class="section-title">Functional Features:</h2>
-            <ul class="feature-list" style="list-style: none; padding: 0;">
+        <section class="content-section">
+            <h2 class="section-title">Key Modes &amp; Gameplay Features:</h2>
+            <div class="feature-grid">
+                <article class="feature-card">
+                    <h3>🤖 3-Difficulty AI Bots</h3>
+                    <p>Challenge <strong>Easy</strong>, <strong>Medium</strong>, or <strong>Hard</strong> bots powered by Alpha-Beta pruning across all 76 winning lines of the 4×4×4 cube. Pick White, Black, or Random starting color and earn daily coin rewards.</p>
+                </article>
+                <article class="feature-card">
+                    <h3>🌐 Ranked Online &amp; ELO</h3>
+                    <p>Create an account or play as a Guest. Ranked matches track 4 separate ELO ratings (<strong>Standard Bullet 1m</strong>, <strong>Standard Blitz 5m</strong>, <strong>Free Bullet 1m</strong>, <strong>Free Blitz 5m</strong>) with live ELO history charts and 60s rematches.</p>
+                </article>
+                <article class="feature-card">
+                    <h3>🏆 Swiss &amp; Knockout Tournaments</h3>
+                    <p>Create or join 4, 8, or 16-player tournaments via room code in <strong>Swiss</strong> or <strong>Knockout Bracket</strong> format — play against real players or bots with optional Host Fund or Entry Fee coin prize pools.</p>
+                </article>
+                <article class="feature-card">
+                    <h3>👥 Friends &amp; Local Network (LAN)</h3>
+                    <p>Add up to 50 friends, see online/in-match presence, and invite friends directly via 6-character room codes. Prefer offline Wi-Fi? Host or join instant peer-to-peer matches on <strong>LAN UDP Port 24444</strong>.</p>
+                </article>
+                <article class="feature-card">
+                    <h3>⏪ Rewind &amp; Match Replay</h3>
+                    <p>Every move is logged in 3D coordinate notation (e.g., <code>a1.1</code>). Step forward or backward through any live board or re-watch past matches directly from your Profile Match History.</p>
+                </article>
+                <article class="feature-card">
+                    <h3>🔊 Synthesized 3D Audio</h3>
+                    <p>Every board material features custom synthesized sound physics — warm walnut wood, crisp ash wood, forest rustle, resonant steel/gold clinks, obsidian stone clicks, sweet cake crunch, and billiard ball clacks.</p>
+                </article>
+            </div>
+        </section>
 
-                <li style="margin-bottom: 15px; display: flex; align-items: start;">
-                    <span style="color: #d32f2f; font-size: 1.2rem; margin-right: 10px;">🎯</span>
-                    <div>
-                        <strong>Smart Highlight (Ghost Rod):</strong>
-                        When hovering the mouse over a column, it lights up yellow. This eliminates misclicks — you
-                        always know where your piece will land.
-                    </div>
-                </li>
+        <section class="content-section">
+            <h2 class="section-title">Deep Customization Shop:</h2>
+            <p class="description">
+                Earn up to <strong>100 coins per day</strong> from victories and achievements to unlock 3D models, procedural GLSL materials, board shapes, and interface themes:
+            </p>
+            <div class="custom-showcase">
+                <div class="custom-box">
+                    <h3>♟️ Piece Skins &amp; Shapes</h3>
+                    <ul>
+                        <li><strong>Round &amp; Square Boards</strong></li>
+                        <li><strong>Common:</strong> Classic Wood (B&amp;W), Crimson &amp; Cobalt, Emerald &amp; Amber, Neon Pulse, Royal Ivory</li>
+                        <li><strong>Rare &amp; Super Rare:</strong> Gold &amp; Silver Rings, Iron Blocks, Halloween Pumpkins</li>
+                        <li><strong>Epic:</strong> Nuclear Core (Uranium-235 &amp; Graphite), Glazed Donuts, Skyscraper Blocks, Billiard Balls (Solid &amp; Stripes)</li>
+                        <li><strong>Legendary:</strong> Tapered 3D Pine Tree, Snowman</li>
+                    </ul>
+                </div>
+                <div class="custom-box">
+                    <h3>🪵 3D Board Environments</h3>
+                    <ul>
+                        <li><strong>Wood &amp; Stone:</strong> Dark Walnut Wood, White Ash Wood, Obsidian Marble</li>
+                        <li><strong>Metals:</strong> Brushed Steel Metal, 24K Pure Gold</li>
+                        <li><strong>Themed Dioramas:</strong> Forest Glade, Snowy Winter, Sweet Cake (Frosting &amp; Wafer)</li>
+                        <li><strong>Special Editions:</strong> Chernobyl (Unit 4), Billiard Table (with Pool Cues), Manhattan Evening (Glass Towers &amp; Clouds)</li>
+                    </ul>
+                </div>
+                <div class="custom-box">
+                    <h3>🎨 Adaptive UI Themes</h3>
+                    <ul>
+                        <li><strong>Gray Day/Night:</strong> Automatically shifts between light day (07:00–19:00) and dark night palettes</li>
+                        <li><strong>Clean Minimalism:</strong> Pure White &amp; OLED Black</li>
+                        <li><strong>Atmospheric:</strong> Wooden Vibe</li>
+                        <li><strong>Seasonal Effects:</strong> New Year (animated falling snow &amp; frost corners) &amp; Halloween</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
 
-                <li style="margin-bottom: 15px; display: flex; align-items: start;">
-                    <span style="color: #d32f2f; font-size: 1.2rem; margin-right: 10px;">📝</span>
-                    <div>
-                        <strong>Move List (History Log):</strong>
-                        A dedicated UI panel that records every move. Great for game analysis and
-                        tracking mistakes.
-                    </div>
-                </li>
-
-                <li style="margin-bottom: 15px; display: flex; align-items: start;">
-                    <span style="color: #d32f2f; font-size: 1.2rem; margin-right: 10px;">✨</span>
-                    <div>
-                        <strong>Victory Effect:</strong>
-                        Once a line is complete, the game automatically highlights the winning combination in yellow
-                        so the final result is unmistakable.
-                    </div>
-                </li>
-
-                <li style="margin-bottom: 15px; display: flex; align-items: start;">
-                    <span style="color: #d32f2f; font-size: 1.2rem; margin-right: 10px;">🔄</span>
-                    <div>
-                        <strong>Quick Restart:</strong>
-                        Made a mistake or want to play again? Simply press the <strong>"R"</strong> key for
-                        an instant match restart.
-                    </div>
-                </li>
-
-                <li style="margin-bottom: 15px; display: flex; align-items: start;">
-                    <span style="color: #d32f2f; font-size: 1.2rem; margin-right: 10px;">📐</span>
-                    <div>
-                        <strong>Clear Grid:</strong>
-                        A clear letter-and-number grid with visual dividers helps you navigate 3D space, so you always
-                        know exactly
-                        where you're placing your piece.
-                    </div>
-                </li>
-
-            </ul>
-        </div>
-
-        <div class="content-section">
-            <h2 class="section-title">Screenshots & Visuals:</h2>
+        <section class="content-section">
+            <h2 class="section-title">Screenshots &amp; Visuals:</h2>
 
             <div class="carousel-wrapper">
-                <button class="nav-btn prev-btn" onclick="moveSlide(-1)">&#10094;</button>
+                <button type="button" class="nav-btn prev-btn" id="carouselPrevBtn" aria-label="Previous screenshot">&#10094;</button>
 
                 <div class="carousel-container" id="carousel">
 
                     <div class="slide">
-                        <div class="img-container" onclick="openModal(this)">
-                            <img src="img/connect4/doska.png" alt="Gameplay">
-                            <div class="zoom-icon">🔍</div>
-                        </div>
-                        <p class="slide-caption">3D Board</p>
+                        <button type="button" class="slide-trigger" data-caption="Main Menu &amp; 3D Board Preview">
+                            <div class="img-container">
+                                <img src="img/connect4/mm.png" alt="Connect 4 3D Main Menu" width="2560" height="1526" loading="lazy">
+                                <div class="zoom-icon" aria-hidden="true">🔍</div>
+                            </div>
+                        </button>
+                        <p class="slide-caption">Main Menu &amp; 3D Preview</p>
                     </div>
 
                     <div class="slide">
-                        <div class="img-container" onclick="openModal(this)">
-                            <img src="img/connect4/podsvetka.png" alt="Move Highlight">
-                            <div class="zoom-icon">🔍</div>
-                        </div>
-                        <p class="slide-caption">"Ghost Rod" Highlight</p>
+                        <button type="button" class="slide-trigger" data-caption="Active 3D Match with Peg Highlight &amp; Move Log">
+                            <div class="img-container">
+                                <img src="img/connect4/doska.png" alt="Connect 4 3D Gameplay and Move Log" width="2560" height="1526" loading="lazy">
+                                <div class="zoom-icon" aria-hidden="true">🔍</div>
+                            </div>
+                        </button>
+                        <p class="slide-caption">3D Gameplay &amp; Move Log</p>
                     </div>
 
                     <div class="slide">
-                        <div class="img-container" onclick="openModal(this)">
-                            <img src="img/connect4/win.png" alt="Victory">
-                            <div class="zoom-icon">🔍</div>
-                        </div>
-                        <p class="slide-caption">Victory Effect</p>
+                        <button type="button" class="slide-trigger" data-caption="Play vs Bot — Difficulty Slider, Color &amp; Rule Mode">
+                            <div class="img-container">
+                                <img src="img/connect4/bot.png" alt="Play vs Bot Settings Modal" width="2560" height="1526" loading="lazy">
+                                <div class="zoom-icon" aria-hidden="true">🔍</div>
+                            </div>
+                        </button>
+                        <p class="slide-caption">Bot Difficulty &amp; Rules</p>
                     </div>
 
                     <div class="slide">
-                        <div class="img-container" onclick="openModal(this)">
-                            <img src="img/connect4/mm.png" alt="Game Menu">
-                            <div class="zoom-icon">🔍</div>
-                        </div>
-                        <p class="slide-caption">User-Friendly Interface</p>
+                        <button type="button" class="slide-trigger" data-caption="Play Online — ELO, Friends, Tournaments &amp; LAN">
+                            <div class="img-container">
+                                <img src="img/connect4/online.png" alt="Play Online, Friends, Tournament and LAN Modal" width="2560" height="1526" loading="lazy">
+                                <div class="zoom-icon" aria-hidden="true">🔍</div>
+                            </div>
+                        </button>
+                        <p class="slide-caption">Online, Tournaments &amp; LAN</p>
+                    </div>
+
+                    <div class="slide">
+                        <button type="button" class="slide-trigger" data-caption="Customization Shop — 3D Piece Skins">
+                            <div class="img-container">
+                                <img src="img/connect4/shop_pieces.png" alt="3D Piece Skins Shop" width="2560" height="1526" loading="lazy">
+                                <div class="zoom-icon" aria-hidden="true">🔍</div>
+                            </div>
+                        </button>
+                        <p class="slide-caption">3D Piece Skins Shop</p>
+                    </div>
+
+                    <div class="slide">
+                        <button type="button" class="slide-trigger" data-caption="Customization Shop — 3D Board Skins &amp; Shapes">
+                            <div class="img-container">
+                                <img src="img/connect4/shop_boards.png" alt="3D Board Skins Shop" width="2560" height="1526" loading="lazy">
+                                <div class="zoom-icon" aria-hidden="true">🔍</div>
+                            </div>
+                        </button>
+                        <p class="slide-caption">3D Board Skins &amp; Shapes</p>
                     </div>
 
                 </div>
 
-                <button class="nav-btn next-btn" onclick="moveSlide(1)">&#10095;</button>
+                <button type="button" class="nav-btn next-btn" id="carouselNextBtn" aria-label="Next screenshot">&#10095;</button>
             </div>
-        </div>
+        </section>
 
-        <div class="content-section">
-            <h2 class="section-title">📜 Game Rules:</h2>
-            <div
-                style="background: #fff8f8; padding: 20px; border-left: 4px solid #ff5252; border-radius: 4px; color: #444;">
-                <ol style="margin: 0; padding-left: 20px; line-height: 1.8;">
-                    <li>Players take turns dropping pieces into one of 16 columns.</li>
-                    <li>A piece always falls to the lowest free cell.</li>
-                    <li><strong>The first player to form a line of 4 pieces wins</strong> in their color.</li>
-                    <li>The line can be: horizontal, vertical, or diagonal.</li>
-                    <li>If all cells are filled and no line of 4 exists — it's a draw.</li>
+        <section class="content-section">
+            <h2 class="section-title">Featured Gameplay View:</h2>
+            <div class="screenshots-grid">
+                <button type="button" class="hero-preview-btn slide-trigger" data-caption="Connect 4 — 3D Procedural Wood Shaders &amp; Peg Highlight">
+                    <img src="img/connect4/doska.png" alt="Connect 4 3D Procedural Shaders Gameplay" width="2560" height="1526" loading="lazy">
+                </button>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Controls Guide:</h2>
+            <div tabindex="0" role="region" aria-labelledby="controls-caption" class="table-wrapper">
+                <table class="controls-table">
+                    <caption id="controls-caption">Connect 4 — 3D keyboard, mouse, and touch controls</caption>
+                    <thead>
+                        <tr>
+                            <th>Input / Control</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>Left Click / Tap on Peg</th>
+                            <td>Place a piece onto the highlighted peg (Standard Gravity or Free Height)</td>
+                        </tr>
+                        <tr>
+                            <th>Mouse Drag / WASD / Touch Drag</th>
+                            <td>Rotate the 3D camera smoothly around the board</td>
+                        </tr>
+                        <tr>
+                            <th>Mouse Wheel / Z, X / Pinch</th>
+                            <td>Zoom camera In &amp; Out (scrolling over the Move Log scrolls moves)</td>
+                        </tr>
+                        <tr>
+                            <th>Arrow Keys (← / → / ↑ / ↓)</th>
+                            <td>Rewind, step forward, jump to start, or jump to latest move</td>
+                        </tr>
+                        <tr>
+                            <th>F (after match ends)</th>
+                            <td>Hide or show the result overlay to inspect the final 3D position</td>
+                        </tr>
+                        <tr>
+                            <th>R / Esc</th>
+                            <td>Quick restart match (R) · Return to Main Menu or close modal (Esc)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">📜 Game Rules (4×4×4):</h2>
+            <div class="rules-card">
+                <ol>
+                    <li>The board consists of <strong>16 vertical pegs</strong> in a 4×4 grid (columns <code>a–d</code>, rows <code>1–4</code>), each holding up to <strong>4 pieces</strong> vertically (levels <code>1–4</code>).</li>
+                    <li><strong>White always moves first.</strong> Players alternate placing one piece per turn (notation: <code>a1.1</code>).</li>
+                    <li>In <strong>Standard Mode</strong>, gravity drops your piece to the lowest open slot on a peg; in <strong>Free Mode</strong>, you can place at any empty 3D slot.</li>
+                    <li><strong>First player to align 4 pieces of their color</strong> along any of the <strong>76 straight lines</strong> (horizontal, vertical, flat diagonal, vertical diagonal, or 3D space diagonal) wins!</li>
+                    <li>If all 64 cells are filled with no line of 4, the match ends in a draw.</li>
                 </ol>
             </div>
-        </div>
+        </section>
 
-        <div class="content-section">
-            <h2 class="section-title">🔜 Development Plans (Roadmap):</h2>
-            <div class="roadmap-box"
-                style="background: #f9f9f9; padding: 20px; border-left: 4px solid #d32f2f; border-radius: 4px;">
-                <ul style="list-style: none; padding-left: 0; line-height: 1.8; color: #444;">
-                    <li>🔴 <strong>Advanced AI:</strong> Integration of bots with difficulty levels (Beginner, Amateur,
-                        Grandmaster).</li>
-                    <li>🔴 <strong>Stockfish-style Analysis:</strong> Real-time position evaluation and post-game
-                        analysis (advantage bar), like in chess.</li>
-                    <li>🔴 <strong>Network Play:</strong> Multiplayer over local network (LAN) and global online.</li>
-                    <li>🔴 <strong>Rating System:</strong> Leagues, ranks, and a leaderboard (MMR / ELO).</li>
-                    <li>🔴 <strong>Customization:</strong> Skins for pieces and the board (neon, metal, wood, etc.).
-                    </li>
-                    <li>🔴 <strong>Turn Indicator:</strong> Display whose turn it is to avoid confusion.</li>
-                    <li>🔴 <strong>Replay System:</strong> Ability to download or upload a move list to review a played
-                        match.</li>
-                </ul>
+        <section id="downloads" class="download-footer download-footer--hub" aria-labelledby="downloads-heading">
+            <div class="download-hub-header">
+                <h2 id="downloads-heading">Play Online &amp; Download for All Platforms</h2>
+                <p>Play instantly in your browser or grab a native build for Windows, macOS, Linux, Android, or iOS.</p>
             </div>
-        </div>
 
-        <div class="content-section">
-            <h2 class="section-title">Gameplay (Unity):</h2>
-            <div class="screenshots-grid">
-                <img src="img/connect4/prewiev.png" alt="Connect 4 Screenshot" onclick="openModal(this)">
-            </div>
-        </div>
-
-        <div class="download-footer">
-            <h3 style="margin-top: 0; color: #c62828;">Choose how to play:</h3>
-
-            <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-top: 20px;">
-
-                <a href="https://den-dragonio.github.io/Connect4_3D/" target="_blank" class="torrent-btn"
-                    style="background: linear-gradient(to bottom, #42a5f5, #1976d2); box-shadow: 0 4px 0 #0d47a1;">
-                    🌐 Play in Browser
+            <div class="online-banner">
+                <div>
+                    <h3>🌐 Play Online in Browser (WebAssembly + WebGL PWA)</h3>
+                    <p>Zero installation — supports Desktop &amp; Mobile touch controls, 3D shaders, bots, online ELO, and shop.</p>
+                </div>
+                <a href="https://connect4-3d-web.onrender.com/" target="_blank" rel="noopener noreferrer" class="online-play-cta">
+                    ▶ Play Online Now
                 </a>
-
-                <a href="files/Connect4_PC.zip" class="torrent-btn" download
-                    style="background: linear-gradient(to bottom, #ef5350, #c62828); box-shadow: 0 4px 0 #b71c1c;">
-                    📥 Download ZIP (Windows)
-                </a>
-
             </div>
-            <p class="file-info" style="margin-top: 15px;">Archive size: 45 MB</p>
-        </div>
+
+            <div class="downloads-container">
+                <div class="download-grid">
+
+                    <article class="platform-card">
+                        <div class="platform-card-top">
+                            <h3>🪟 Windows <span class="platform-badge">Win 7–11</span></h3>
+                            <p>Choose the NSIS installer (with Start Menu &amp; Desktop shortcuts) or the standalone 64-bit portable archive.</p>
+                        </div>
+                        <div class="platform-actions">
+                            <a href="files/connect4/Connect4_3D_Setup.exe" class="dl-btn dl-btn--win" download>
+                                📥 Download Installer (.exe · 3.9 MB)
+                            </a>
+                            <a href="files/connect4/Connect4_3D_Win64_Portable.zip" class="dl-btn dl-btn--secondary" download>
+                                📦 Portable 64-bit (.zip · 5.1 MB)
+                            </a>
+                        </div>
+                    </article>
+
+                    <article class="platform-card">
+                        <div class="platform-card-top">
+                            <h3>🍎 macOS (MacBook) <span class="platform-badge">Universal</span></h3>
+                            <p>Universal disk image supporting both Apple Silicon (M1–M4) and Intel Macs. Drag to Applications and play.</p>
+                        </div>
+                        <div class="platform-actions">
+                            <a href="files/connect4/Connect4_3D_Mac.dmg" class="dl-btn dl-btn--mac" download>
+                                📥 Download macOS (.dmg · 12 MB)
+                            </a>
+                        </div>
+                    </article>
+
+                    <article class="platform-card">
+                        <div class="platform-card-top">
+                            <h3>🐧 Linux <span class="platform-badge">LÖVE 11.4+</span></h3>
+                            <p>Includes <code>Connect4_3D.love</code> + launcher script <code>connect4-3d.sh</code> (requires <code>love</code> via apt/pacman/dnf or Flatpak).</p>
+                        </div>
+                        <div class="platform-actions">
+                            <a href="files/connect4/Connect4_3D_Linux.tar.gz" class="dl-btn dl-btn--linux" download>
+                                📥 Download Linux Bundle (.tar.gz · 941 KB)
+                            </a>
+                            <a href="files/connect4/Connect4_3D.love" class="dl-btn dl-btn--secondary" download>
+                                🎮 Universal .love Archive (945 KB)
+                            </a>
+                        </div>
+                    </article>
+
+                    <article class="platform-card">
+                        <div class="platform-card-top">
+                            <h3>🤖 Android <span class="platform-badge">Signed APK</span></h3>
+                            <p>Signed Android APK with full touch controls, pinch-to-zoom camera, online ELO, bots, and 3D shaders.</p>
+                        </div>
+                        <div class="platform-actions">
+                            <a href="files/connect4/Connect4_3D_Android.apk" class="dl-btn dl-btn--android" download>
+                                📥 Download Android (.apk · 8.2 MB)
+                            </a>
+                        </div>
+                    </article>
+
+                    <article class="platform-card">
+                        <div class="platform-card-top">
+                            <h3>📱 iOS (iPhone / iPad) <span class="platform-badge">Xcode / PWA</span></h3>
+                            <p>Download the Xcode project bundle to build/sideload natively, or launch in iOS Safari and tap Share → Add to Home Screen.</p>
+                        </div>
+                        <div class="platform-actions">
+                            <a href="files/connect4/Connect4_3D_iOS_Xcode.zip" class="dl-btn dl-btn--ios" download>
+                                📥 Download iOS Xcode Bundle (.zip · 17 MB)
+                            </a>
+                            <a href="https://connect4-3d-web.onrender.com/" target="_blank" rel="noopener noreferrer" class="dl-btn dl-btn--secondary">
+                                🌐 Open Web / PWA on Safari
+                            </a>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+
+            <div class="source-footer-row">
+                <span>Built with Lua &amp; LÖVE2D · Open Source on GitHub</span>
+                <a href="https://github.com/Den-Dragonio/connect-4-3d" target="_blank" rel="noopener noreferrer" class="action-btn action-btn--source">
+                    💻 View Source Code on GitHub
+                </a>
+            </div>
+        </section>
 
     </main>
 
     <footer>
-        <p>&copy; 2025 My Apps Collection</p>
+        <p>&copy; 2025 - 2026 My Apps Collection</p>
     </footer>
 
-    <div id="imageModal" class="modal" onclick="closeModal()">
-        <span class="close">&times;</span>
-        <img class="modal-content" id="modalImg">
-    </div>
-    <script src="script.js"></script>
+    <dialog id="imageModal" class="lightbox-dialog" closedby="any" aria-labelledby="imageModalCaption">
+        <img class="lightbox-img" id="modalImg" src="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=" alt="">
+        <div class="lightbox-bar">
+            <span id="imageModalCaption">Screenshot preview</span>
+            <button type="button" class="lightbox-close" command="close" commandfor="imageModal" autofocus>Close (Esc)</button>
+        </div>
+    </dialog>
+
+    <script>
+        (function () {
+            const carousel = document.getElementById('carousel');
+            const prevBtn = document.getElementById('carouselPrevBtn');
+            const nextBtn = document.getElementById('carouselNextBtn');
+            const dialog = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImg');
+            const modalCaption = document.getElementById('imageModalCaption');
+            const closeBtn = dialog.querySelector('.lightbox-close');
+
+            function moveSlide(direction) {
+                const scrollAmount = 280;
+                carousel.scrollLeft += direction * scrollAmount;
+            }
+
+            prevBtn.addEventListener('click', function () {
+                moveSlide(-1);
+            });
+
+            nextBtn.addEventListener('click', function () {
+                moveSlide(1);
+            });
+
+            document.querySelectorAll('.slide-trigger').forEach(function (trigger) {
+                trigger.addEventListener('click', function () {
+                    const img = trigger.querySelector('img');
+                    if (!img) return;
+                    modalImg.src = img.currentSrc || img.src;
+                    modalImg.alt = img.alt;
+                    modalCaption.textContent = trigger.dataset.caption || img.alt || 'Screenshot preview';
+                    dialog.showModal();
+                });
+            });
+
+            if (!('commandForElement' in HTMLButtonElement.prototype)) {
+                closeBtn.addEventListener('click', function () {
+                    dialog.close();
+                });
+            }
+
+            if (!('closedBy' in HTMLDialogElement.prototype)) {
+                const outside = function (e) {
+                    const r = dialog.getBoundingClientRect();
+                    return e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom;
+                };
+                let pressedOutside = false;
+                dialog.addEventListener('pointerdown', function (e) {
+                    pressedOutside = outside(e);
+                });
+                dialog.addEventListener('pointerup', function (e) {
+                    if (pressedOutside && outside(e)) {
+                        dialog.close();
+                    }
+                });
+            }
+
+            dialog.addEventListener('close', function () {
+                dialog.returnValue = '';
+            });
+        })();
+    </script>
 
 </body>
 
