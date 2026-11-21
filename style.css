@@ -224,6 +224,54 @@ footer {
     /* Темно-красный заголовок */
 }
 
+.c4-featured {
+    position: relative;
+    background: linear-gradient(145deg, #ffffff 0%, #fff4f2 55%, #ffebee 100%);
+    border: 1.5px solid #e57373;
+    box-shadow: 0 6px 18px rgba(198, 40, 40, 0.13), inset 0 3px 0 #d97706;
+}
+
+.c4-featured:hover {
+    background: linear-gradient(145deg, #fffdfb 0%, #ffebee 60%, #ffcdd2 100%);
+    box-shadow: 0 12px 24px rgba(198, 40, 40, 0.2), inset 0 3px 0 #b45309;
+    transform: translateY(-5px);
+}
+
+.c4-card-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.c4-card-head h2 {
+    margin: 0;
+}
+
+.featured-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 9px;
+    border-radius: 999px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: #92400e;
+    background: linear-gradient(180deg, #fef3c7 0%, #fde68a 100%);
+    border: 1px solid #f59e0b;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.c4-featured p {
+    margin: 0;
+    font-size: 0.93rem;
+    line-height: 1.45;
+}
+
 /* --- СТИЛЬ ДЛЯ СПОРТИВНОЙ КАРТОЧКИ (Gym) --- */
 .gym-style {
     /* Градиент: от белого к светло-оранжевому */
